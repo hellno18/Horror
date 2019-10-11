@@ -25,12 +25,19 @@ public class FlashLight : MonoBehaviour
         if (isLight)
         {
             batLevel -= Time.deltaTime;
+            Light light = GameObject.Find("Spotlight").GetComponent<Light>();
+            Light pointLight = GameObject.Find("PointLight").GetComponent<Light>();
             //turn off the light while power battery become 0
-            if(batLevel<0)
+            if (batLevel<0)
             {
-                Light light = GameObject.Find("Spotlight").GetComponent<Light>();
                 light.enabled=false;
+                pointLight.enabled = false;
                 batLevel = 0;
+            }
+            else
+            {
+                light.enabled = true;
+                pointLight.enabled = true;
             }
         }
 
