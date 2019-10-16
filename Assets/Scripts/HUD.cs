@@ -23,7 +23,7 @@ public class HUD : MonoBehaviour
         //get component health
         health = player.GetComponent<Health>();
         //get component flashlight
-        flashlight = player.GetComponent<FlashLight>();
+        flashlight = player.GetComponentInChildren<FlashLight>();
         //get component slider
         batterySystem = this.transform.Find("Battery System").GetComponent<Slider>();
         //get component slider 
