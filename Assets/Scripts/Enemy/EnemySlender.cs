@@ -1,18 +1,81 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySlender : EnemyBase
 {
+    [SerializeField] Transform[] points;
+    Transform player;
+    private int destPoint = 0;
+    FlashLight flashlight;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //get component player
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); ;
+        //get component navmeshagent
+        navMesh = GetComponent<NavMeshAgent>();
+        //get component flashlight
+        flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
+        GotoNextPoint();
     }
 
     protected override void ComputeVelocity()
     {
-     
+        Vector3 direction = player.position - this.transform.position;
+       // print(direction.magnitude);
+        direction.y = 0;
+        float angle = Vector3.Angle(direction, this.transform.forward);
+        if (Vector3.Distance(player.position, this.transform.position) < 30 && angle < 180)
+        {
+            if (flashlight.GetIsLight)
+            {
+                enemySpeed = 1.5f;
+            }
+            else
+            {
+                enemySpeed = 6f;
+                if (direction.magnitude < 3.5f)
+                {
+                    //destroy character
+                    Destroy(gameObject);
+                    //TODO spawn UI Dead
+                }
+                
+            }
+            this.transform.position += this.transform.forward * enemySpeed * Time.deltaTime;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
+                Quaternion.LookRotation(direction), 0.1f * Time.deltaTime * 50.0f);
+
+            if (direction.magnitude > 5)
+            {
+                //chashing true
+                this.transform.Translate(0, 0, 0.05f);
+            }
+        }
+       
+        else if (navMesh.remainingDistance < 0.5f)
+        {
+            //idle and find another to patrol
+            GotoNextPoint();
+        }
     }
+
+    void GotoNextPoint()
+    {
+        // Returns if no points have been set up
+        if (points.Length == 0)
+            return;
+
+        // Set the agent to go to the currently selected destination.
+        navMesh.destination = points[destPoint].position;
+
+        // Choose the next point in the array as the destination,
+        // cycling to the start if necessary.
+        destPoint = (destPoint + 1) % points.Length;
+    }
+
 
 }

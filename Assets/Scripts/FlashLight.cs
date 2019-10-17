@@ -48,11 +48,13 @@ public class FlashLight : MonoBehaviour
                 light.enabled=false;
                 pointLight.enabled = false;
                 batLevel = 0;
+                isLight = false;
             }
             else
             {
                 light.enabled = true;
                 pointLight.enabled = true;
+                isLight = true;
             }
         }
 
@@ -85,6 +87,15 @@ public class FlashLight : MonoBehaviour
                 batCount = 0;
             }
             
+        }
+    }
+
+    //Getter Battery isLight
+    public bool GetIsLight
+    {
+        get
+        {
+            return isLight;
         }
     }
 
