@@ -9,7 +9,7 @@ public class HUD : MonoBehaviour
     bool is_gButton;
     GameObject player;
     FlashLight flashlight;
-    Health health;
+    PlayerController health;
     Slider batterySystem;
     Slider healthSystem;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour
         //Find player
         player = GameObject.FindGameObjectWithTag("Player");
         //get component health
-        health = player.GetComponent<Health>();
+        health = player.GetComponent<PlayerController>();
         //get component flashlight
         flashlight = player.GetComponentInChildren<FlashLight>();
         //get component slider

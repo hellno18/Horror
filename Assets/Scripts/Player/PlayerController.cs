@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class PlayerController : PlayerBase
 {
-    private int health=100;
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         
     }
-    
+
+    protected override void Run()
+    {
+
+    }
+
 
     //Getter get Health
     public int GetHealth
@@ -20,6 +30,4 @@ public class Health : MonoBehaviour
             return health;
         }
     }
-
-    
 }
