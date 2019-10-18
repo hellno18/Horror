@@ -160,7 +160,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.322
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 1825612854}
   - component: {fileID: 1825612853}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: CanvasSlender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,7 +1067,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: adca988afbee3ee4ea3ac01a83998491, type: 3}
+  - {fileID: 2100000, guid: 259871c460a9c6b458c18fb4e0d022f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

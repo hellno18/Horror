@@ -363,7 +363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1971239766532414, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
       propertyPath: m_Name
-      value: Slender Prefab
+      value: Slender
       objectReference: {fileID: 0}
     - target: {fileID: 4635387628181502, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
       propertyPath: m_LocalPosition.x

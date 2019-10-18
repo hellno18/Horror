@@ -13,6 +13,7 @@ public class FlashLight : MonoBehaviour
     Camera mainCamera;
     EnemySlender enemySlender;
     Examines examines;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +89,8 @@ public class FlashLight : MonoBehaviour
             if (batCount > 0)
             {
                 batCount -= 1;
-                SetBatLevel(100f);
+                //SetBatLevel to 100;
+                this.SetBatLevel = 100f;
             }
             else if (batCount < 0)
             {
@@ -126,10 +128,14 @@ public class FlashLight : MonoBehaviour
     }
 
     //Setter Battery Light
-    public void SetBatLevel(float batt)
+    public float SetBatLevel
     {
-        batLevel = batt;
+        set
+        {
+            batLevel = value;
+        }
     }
+
 
     //Getter Battery Count
     public int GetBatCount
