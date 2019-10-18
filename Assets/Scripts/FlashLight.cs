@@ -7,8 +7,12 @@ public class FlashLight : MonoBehaviour
     private bool isLight;
     private float batLevel=50f;
     private int batCount=0;
+    private float damage=0.5f;
+    bool delayDamage = false;
     Transform hand;
     Camera mainCamera;
+    EnemySlender enemySlender;
+    Examines examines;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,8 @@ public class FlashLight : MonoBehaviour
         //find hand component
         hand = this.transform.Find("Hand");
         mainCamera = this.transform.GetComponent<Camera>();
+        //get component examines
+        examines = GameObject.FindGameObjectWithTag("Player").GetComponent<Examines>();
     }
 
     // Update is called once per frame
@@ -36,7 +42,9 @@ public class FlashLight : MonoBehaviour
                 //Give damage to enemy with flashlight
                 if (hit.collider.tag == "Slender")
                 {
-                    Debug.Log("DAMAGE");
+                    enemySlender= hit.collider.transform.GetComponent<EnemySlender>();
+                    StartCoroutine("DamageCoroutine");
+                    if(delayDamage) enemySlender.DamageHitEnemy(damage);
                 }
             }
             
@@ -59,7 +67,7 @@ public class FlashLight : MonoBehaviour
         }
 
         //get input flashlight button
-        if (Input.GetButtonUp("Flashlight"))
+        if (Input.GetButtonUp("Flashlight")&& examines.GetExamineMode==false)
         {
             if (!isLight)
             {
@@ -88,6 +96,15 @@ public class FlashLight : MonoBehaviour
             }
             
         }
+    }
+
+    //Damage delay coroutine
+    IEnumerator DamageCoroutine()
+    {
+        delayDamage = true;
+        yield return new WaitForSeconds(0.3f);
+        delayDamage = false;
+
     }
 
     //Getter Battery isLight

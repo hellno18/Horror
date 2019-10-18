@@ -11,14 +11,11 @@ public class Examines : MonoBehaviour
     Vector3 originaPosition;
     Vector3 originalRotation;
 
-    
-
     //If True Allow Rotation Of Object
     bool examineMode;
 
     //if true allow to interact
     bool isInteract;
-
 
     void Start()
     {

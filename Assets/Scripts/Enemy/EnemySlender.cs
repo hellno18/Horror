@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemySlender : EnemyBase
 {
@@ -13,17 +14,26 @@ public class EnemySlender : EnemyBase
     // Start is called before the first frame update
     void Start()
     {
+        enemyHealth = 100;
         //get component player
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); ;
         //get component navmeshagent
         navMesh = GetComponent<NavMeshAgent>();
         //get component flashlight
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
+        //get component slender health bar
+        enemyBar = this.GetComponentInChildren<Slider>();
         GotoNextPoint();
     }
 
-    protected override void ComputeVelocity()
+    protected override void Run()
     {
+        enemyBar.value = enemyHealth/100;
+        if (enemyHealth < 0)
+        {
+            Destroy(gameObject);
+        }
+
         Vector3 direction = player.position - this.transform.position;
        // print(direction.magnitude);
         direction.y = 0;
@@ -77,5 +87,9 @@ public class EnemySlender : EnemyBase
         destPoint = (destPoint + 1) % points.Length;
     }
 
+    public void DamageHitEnemy(float damage)
+    {
+        enemyHealth -= damage;
+    }
 
 }

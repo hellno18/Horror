@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.2793963, g: 0.26136994, b: 0.206617, a: 1}
+  m_IndirectSpecularColor: {r: 0.27939555, g: 0.2613695, b: 0.20661667, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -411,11 +411,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8325978500415590011, guid: faf22e49f948bba4393136d833b4d4a6,
         type: 3}
-      propertyPath: points.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8325978500415590011, guid: faf22e49f948bba4393136d833b4d4a6,
-        type: 3}
       propertyPath: points.Array.data[0]
       value: 
       objectReference: {fileID: 1624039837}
@@ -429,6 +424,26 @@ PrefabInstance:
       propertyPath: points.Array.data[2]
       value: 
       objectReference: {fileID: 242385730}
+    - target: {fileID: 1825612851, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
+      propertyPath: m_Name
+      value: CanvasSlender
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825612854, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 772362226, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
+      propertyPath: m_Value
+      value: 0.322
+      objectReference: {fileID: 0}
+    - target: {fileID: 148999963, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148999963, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
 --- !u!1 &705507993
@@ -694,7 +709,7 @@ GameObject:
   - component: {fileID: 792579350}
   - component: {fileID: 792579354}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: CanvasHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

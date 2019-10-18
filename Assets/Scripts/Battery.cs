@@ -13,7 +13,7 @@ public class Battery : MonoBehaviour
         //get component flashlight
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponent<FlashLight>();
         //get component HUD
-        hud = GameObject.Find("Canvas").GetComponent<HUD>();
+        hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         //get component examine
         examines = GameObject.FindGameObjectWithTag("Player").GetComponent<Examines>();
     }
