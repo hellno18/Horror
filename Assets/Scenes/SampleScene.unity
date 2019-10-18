@@ -424,6 +424,11 @@ PrefabInstance:
       propertyPath: points.Array.data[2]
       value: 
       objectReference: {fileID: 242385730}
+    - target: {fileID: 137436602432895146, guid: faf22e49f948bba4393136d833b4d4a6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 259871c460a9c6b458c18fb4e0d022f9, type: 2}
     - target: {fileID: 1825612851, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
       propertyPath: m_Name
       value: CanvasSlender

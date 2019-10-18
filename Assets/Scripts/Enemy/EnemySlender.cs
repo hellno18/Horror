@@ -8,8 +8,11 @@ public class EnemySlender : EnemyBase
 {
     [SerializeField] Transform[] points;
     Transform player;
+    private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
+    Material mat;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +26,20 @@ public class EnemySlender : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
+        //get component material for shader
+        mat = this.GetComponent<Renderer>().material;
+        //Find another point
         GotoNextPoint();
     }
 
     protected override void Run()
-    {
+    {  
         enemyBar.value = enemyHealth/100;
         if (enemyHealth < 0)
         {
-            Destroy(gameObject);
+            //Hide EnemyBar
+            enemyBar.gameObject.SetActive(false);
+            StartCoroutine("DissolveEnemyCoroutine");
         }
 
         Vector3 direction = player.position - this.transform.position;
@@ -87,6 +95,16 @@ public class EnemySlender : EnemyBase
         destPoint = (destPoint + 1) % points.Length;
     }
 
+    IEnumerator DissolveEnemyCoroutine()
+    {
+        timeDis += Time.deltaTime;
+        mat.SetFloat("_DissolveAmount", timeDis / 2 + 0.1f);
+        yield return new WaitForSeconds(0.3f);
+        if (mat.GetFloat("_DissolveAmount") >= 1)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void DamageHitEnemy(float damage)
     {
         enemyHealth -= damage;
