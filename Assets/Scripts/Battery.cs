@@ -11,11 +11,13 @@ public class Battery : MonoBehaviour
     void Start()
     {
         //get component flashlight
-        flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
+        flashlight = GameObject.FindGameObjectWithTag("Player")
+            .GetComponentInChildren<FlashLight>();
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         //get component examine
-        examines = GameObject.FindGameObjectWithTag("Player").GetComponent<Examines>();
+        examines = GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<Examines>();
     }
 
     // Update is called once per frame

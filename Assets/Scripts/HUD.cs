@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    Transform gButton;
-    bool is_gButton;
-    GameObject player;
-    FlashLight flashlight;
-    PlayerController health;
-    Slider batterySystem;
-    Slider healthSystem;
+    private Transform gButton;
+    private bool is_gButton;
+    private GameObject player;
+    private FlashLight flashlight;
+    private PlayerController health;
+    private Slider batterySystem;
+    private Slider healthSystem;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,7 +27,8 @@ public class HUD : MonoBehaviour
         //get component slider
         batterySystem = this.transform.Find("Battery System").GetComponent<Slider>();
         //get component slider 
-        healthSystem = this.transform.Find("Health System/HealthSlider").GetComponent<Slider>();
+        healthSystem = this.transform.Find("Health System/HealthSlider")
+            .GetComponent<Slider>();
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : PlayerBase
 {
-    TextMeshProUGUI stressLVText;
+    private TextMeshProUGUI stressLVText;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,9 @@ public class PlayerController : PlayerBase
         health = 100;
         //set default stress LV
         stressLV = 0;
-        stressLVText = GameObject.FindGameObjectWithTag("StressLV").GetComponent<TextMeshProUGUI>();
+        stressLVText = GameObject
+            .FindGameObjectWithTag("StressLV")
+            .GetComponent<TextMeshProUGUI>();
         stressLVText.text = stressLV.ToString();
     }
 

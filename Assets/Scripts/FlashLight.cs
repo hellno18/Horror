@@ -8,11 +8,11 @@ public class FlashLight : MonoBehaviour
     private float batLevel=50f;
     private int batCount=0;
     private float damage=0.5f;
-    bool delayDamage = false;
-    Transform hand;
-    Camera mainCamera;
-    EnemySlender enemySlender;
-    Examines examines;
+    private bool delayDamage = false;
+    private Transform hand;
+    private Camera mainCamera;
+    private EnemySlender enemySlender;
+    private Examines examines;
     
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,8 @@ public class FlashLight : MonoBehaviour
         hand = this.transform.Find("Hand");
         mainCamera = this.transform.GetComponent<Camera>();
         //get component examines
-        examines = GameObject.FindGameObjectWithTag("Player").GetComponent<Examines>();
+        examines = GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<Examines>();
     }
 
     // Update is called once per frame
@@ -38,7 +39,8 @@ public class FlashLight : MonoBehaviour
 
             //Raycast to Gameobject
             RaycastHit hit;
-            if(Physics.Raycast(this.mainCamera.transform.position,this.mainCamera.transform.forward,out hit))
+            if(Physics.Raycast(this.mainCamera.transform.position,
+                this.mainCamera.transform.forward,out hit))
             {
                 //Give damage to enemy with flashlight
                 if (hit.collider.tag == "Slender")

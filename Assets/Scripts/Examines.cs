@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Examines : MonoBehaviour
 {
-    Camera mainCam;//Camera Object Will Be Placed In Front Of
-    GameObject clickedObject;//Currently Clicked Object
+    private Camera mainCam;//Camera Object Will Be Placed In Front Of
+    private GameObject clickedObject;//Currently Clicked Object
 
     //Holds Original Postion And Rotation So The Object Can Be Replaced Correctly
-    Vector3 originaPosition;
-    Vector3 originalRotation;
+    private Vector3 originaPosition;
+    private Vector3 originalRotation;
 
     //If True Allow Rotation Of Object
-    bool examineMode;
+    private bool examineMode;
 
     //if true allow to interact
-    bool isInteract;
+    private bool isInteract;
 
     void Start()
     {
         //mainCam = Camera.main;
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera")
+            .GetComponent<Camera>();
         examineMode = false;
         isInteract = false;
     }
@@ -57,7 +58,8 @@ public class Examines : MonoBehaviour
                     originalRotation = clickedObject.transform.rotation.eulerAngles;
 
                     //Now Move Object In Front Of Camera
-                    clickedObject.transform.position = mainCam.transform.position + (transform.forward);
+                    clickedObject.transform.position = mainCam.transform.position 
+                        + (transform.forward);
 
                     //Pause The Game
                     Time.timeScale = 0;
