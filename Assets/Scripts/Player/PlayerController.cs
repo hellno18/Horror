@@ -37,6 +37,7 @@ public class PlayerController : PlayerBase
         }
     }
 
+    //Setter Health
     public int SetHealth
     {
         set
@@ -45,6 +46,7 @@ public class PlayerController : PlayerBase
         }
     }
 
+    //Setter Getter StressLV
     public int StressLV
     {
         get

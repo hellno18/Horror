@@ -7,16 +7,20 @@ public class FlashLight : MonoBehaviour
     private bool isLight;
     private float batLevel=50f;
     private int batCount=0;
+    private float distance = 15f;
     private float damage=0.5f;
     private bool delayDamage = false;
     private Transform hand;
     private Camera mainCamera;
     private EnemySlender enemySlender;
     private Examines examines;
+    private float timer=5;
+    private float currTimer;
     
     // Start is called before the first frame update
     void Start()
     {
+        currTimer = timer;
         //light off
         isLight = false;
         //find hand component
@@ -30,17 +34,33 @@ public class FlashLight : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log(batLevel);
         //if turn on light will decrease
         if (isLight)
         {
+            PlayerController player = GameObject.FindGameObjectWithTag("Player")
+             .GetComponent<PlayerController>();
+            //current time minus
+            currTimer -= Time.deltaTime;
+           // timer become 0
+           if (currTimer < 0)
+           {
+              player.StressLV -= 1;
+              currTimer = timer;
+           }
+            
+           //while stress lv become 0
+           if (player.StressLV < 0)
+           {
+              player.StressLV -= 0;
+           }
+
             //decrease light power
             batLevel -= Time.deltaTime;
 
             //Raycast to Gameobject
             RaycastHit hit;
             if(Physics.Raycast(this.mainCamera.transform.position,
-                this.mainCamera.transform.forward,out hit))
+                this.mainCamera.transform.forward,out hit,distance))
             {
                 //Give damage to enemy with flashlight
                 if (hit.collider.tag == "Slender")
@@ -72,7 +92,43 @@ public class FlashLight : MonoBehaviour
         }
         else
         {
-            StartCoroutine(StressLVUpCoroutine());
+            PlayerController player = GameObject.FindGameObjectWithTag("Player")
+             .GetComponent<PlayerController>();
+            currTimer -= Time.deltaTime;
+            if (player.StressLV < 20)
+            {
+                if (currTimer < 0)
+                {
+                    player.StressLV += 1;
+                    //timer default 5 seconds
+                    currTimer = timer;
+                }
+            }
+            else if(player.StressLV >20&& player.StressLV < 50)
+            {
+                if (currTimer < 0)
+                {
+                    player.StressLV += 1;
+                    currTimer = 3;
+                }
+            }
+            else if(player.StressLV >= 50&& player.StressLV < 100)
+            {
+                if (currTimer < 0)
+                {
+                    player.StressLV += 2;
+                    currTimer = 1;
+                }
+            }
+            else
+            {
+                player.StressLV = 100;
+                //Dead Show Slenderman face
+                //TODO
+            }
+           
+            
+            
         }
 
         //get input flashlight button
@@ -115,15 +171,6 @@ public class FlashLight : MonoBehaviour
         delayDamage = true;
         yield return new WaitForSeconds(0.3f);
         delayDamage = false;
-    }
-
-    //StressLV UP Coroutine
-    IEnumerator StressLVUpCoroutine()
-    {
-        PlayerController player = GameObject.FindGameObjectWithTag("Player")
-            .GetComponent<PlayerController>();
-        yield return new WaitForSeconds(2f);
-        player.StressLV += 1;
     }
 
     //Getter Battery isLight
