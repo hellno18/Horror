@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Battery
   - Item
+  - Fire
+  - Slender
+  - StressLV
   layers:
   - Default
   - TransparentFX

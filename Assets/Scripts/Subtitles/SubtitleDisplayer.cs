@@ -61,7 +61,7 @@ public class SubtitleDisplayer : MonoBehaviour
       }
       else
       {
-        Debug.Log("Subtitles ended");
+        //Debug.Log("Subtitles ended");
         StartCoroutine(FadeTextOut(currentlyDisplayingText));
         yield return FadeTextOut(fadedOutText);
         currentlyDisplayingText.gameObject.SetActive(false);
