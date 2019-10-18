@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUD : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class HUD : MonoBehaviour
     private bool is_gButton;
     private GameObject player;
     private FlashLight flashlight;
-    private PlayerController health;
+    private PlayerController playerController;
     private Slider batterySystem;
     private Slider healthSystem;
+    private TextMeshProUGUI stressLVText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,7 +23,7 @@ public class HUD : MonoBehaviour
         //Find player
         player = GameObject.FindGameObjectWithTag("Player");
         //get component health
-        health = player.GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
         //get component flashlight
         flashlight = player.GetComponentInChildren<FlashLight>();
         //get component slider
@@ -29,13 +31,19 @@ public class HUD : MonoBehaviour
         //get component slider 
         healthSystem = this.transform.Find("Health System/HealthSlider")
             .GetComponent<Slider>();
+        //get component stressLV
+        stressLVText = GameObject
+            .FindGameObjectWithTag("StressLV")
+            .GetComponent<TextMeshProUGUI>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         batterySystem.value = flashlight.GetBatLight/100;
-        healthSystem.value = health.GetHealth / 100;
+        healthSystem.value = playerController.GetHealth / 100;
+        stressLVText.text = playerController.StressLV.ToString();
     }
 
     //toggle G Button Display

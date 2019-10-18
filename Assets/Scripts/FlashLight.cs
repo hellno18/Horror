@@ -28,7 +28,7 @@ public class FlashLight : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Debug.Log(batLevel);
         //if turn on light will decrease
@@ -51,8 +51,10 @@ public class FlashLight : MonoBehaviour
                 }
             }
             
-            Light light = GameObject.Find("Spotlight").GetComponent<Light>();
-            Light pointLight = GameObject.Find("PointLight").GetComponent<Light>();
+            Light light = GameObject.Find("Spotlight")
+                .GetComponent<Light>();
+            Light pointLight = GameObject.Find("PointLight")
+                .GetComponent<Light>();
             //turn off the light while power battery become 0
             if (batLevel<0)
             {
@@ -68,9 +70,14 @@ public class FlashLight : MonoBehaviour
                 isLight = true;
             }
         }
+        else
+        {
+            StartCoroutine(StressLVUpCoroutine());
+        }
 
         //get input flashlight button
-        if (Input.GetButtonUp("Flashlight")&& examines.GetExamineMode==false)
+        if (Input.GetButtonUp("Flashlight")&&
+            examines.GetExamineMode==false)
         {
             if (!isLight)
             {
@@ -108,7 +115,15 @@ public class FlashLight : MonoBehaviour
         delayDamage = true;
         yield return new WaitForSeconds(0.3f);
         delayDamage = false;
+    }
 
+    //StressLV UP Coroutine
+    IEnumerator StressLVUpCoroutine()
+    {
+        PlayerController player = GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<PlayerController>();
+        yield return new WaitForSeconds(2f);
+        player.StressLV += 1;
     }
 
     //Getter Battery isLight
