@@ -15,11 +15,16 @@ public class PlayerBase : MonoBehaviour
     private void Update()
     {
         Run();
+        FlashLightRun();
     }
     protected virtual void Run()
     {
-
+        //Overloading
+    }
+    protected virtual void FlashLightRun()
+    {
+        //Overloading
     }
 
 
- }
+}
