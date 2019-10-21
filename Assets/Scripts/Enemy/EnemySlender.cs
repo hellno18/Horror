@@ -12,7 +12,7 @@ public class EnemySlender : EnemyBase
     private int destPoint = 0;
     FlashLight flashlight;
     Material mat;
-    
+    bool isDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +72,7 @@ public class EnemySlender : EnemyBase
                 //chashing true
                 this.transform.Translate(0, 0, 0.05f);
             }
+
         }
        
         else if (navMesh.remainingDistance < 0.5f)
@@ -105,9 +106,11 @@ public class EnemySlender : EnemyBase
             Destroy(gameObject);
         }
     }
+
     public void DamageHitEnemy(float damage)
     {
         enemyHealth -= damage;
+        
     }
 
 }

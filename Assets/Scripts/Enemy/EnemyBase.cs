@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour
     protected NavMeshAgent navMesh;
     protected Animator animator;
     protected Slider enemyBar;
+
     // Start is called before the first frame update
     void Start()
     {

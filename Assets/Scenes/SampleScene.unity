@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.27939555, g: 0.2613695, b: 0.20661667, a: 1}
+  m_IndirectSpecularColor: {r: 0.2793963, g: 0.26136994, b: 0.206617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -430,6 +430,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 148999963, guid: faf22e49f948bba4393136d833b4d4a6, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 111329587163206290, guid: faf22e49f948bba4393136d833b4d4a6,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 111329587163206290, guid: faf22e49f948bba4393136d833b4d4a6,
+        type: 3}
+      propertyPath: m_Animations.Array.data[2]
+      value: 
+      objectReference: {fileID: 7400000, guid: 06c024c892933fe488beabbab2a51c28, type: 2}
+    - target: {fileID: 111329587163206290, guid: faf22e49f948bba4393136d833b4d4a6,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1411,6 +1426,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350782465}
   m_CullTransparentMesh: 0
+--- !u!1 &1551602632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1971239766532414, guid: faf22e49f948bba4393136d833b4d4a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 391653398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1551602639
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551602632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 952448dc6048aa94b82c421e25175e04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1557406357
 GameObject:
   m_ObjectHideFlags: 0

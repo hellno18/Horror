@@ -9,7 +9,6 @@ public class FlashLight : PlayerBase
     private int batCount=0;
     private float distance = 15f;
     private float damage=0.5f;
-    private bool isDamage = false;
     private Transform hand;
     private Camera mainCamera;
     private EnemySlender enemySlender;
@@ -126,9 +125,6 @@ public class FlashLight : PlayerBase
                 //Dead Show Slenderman face
                 //TODO
             }
-
-
-
         }
 
         //get input flashlight button
