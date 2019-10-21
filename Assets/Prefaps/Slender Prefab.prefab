@@ -1022,10 +1022,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4635387628181502}
   - component: {fileID: 137436602432895146}
-  - component: {fileID: 111329587163206290}
   - component: {fileID: 80973970}
   - component: {fileID: 8325978500415590011}
   - component: {fileID: 5563243691986805106}
+  - component: {fileID: 1551602639}
   m_Layer: 0
   m_Name: Slender Prefab
   m_TagString: Slender
@@ -1117,23 +1117,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.10405676, y: -0.0144222975, z: 0.07126397}
     m_Extent: {x: 0.28077292, y: 0.3956554, z: 0.35450524}
   m_DirtyAABB: 0
---- !u!111 &111329587163206290
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971239766532414}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 0387ecad5a9130649ade5c12d1b75d75, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0387ecad5a9130649ade5c12d1b75d75, type: 2}
-  - {fileID: 0}
-  m_WrapMode: 2
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!136 &80973970
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1186,6 +1169,25 @@ NavMeshAgent:
   m_BaseOffset: -0.01
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &1551602639
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971239766532414}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 952448dc6048aa94b82c421e25175e04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1996585809318630
 GameObject:
   m_ObjectHideFlags: 0
