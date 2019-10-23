@@ -15,7 +15,7 @@ public class FlashLight : PlayerBase
     private Examines examines;
     private float timer=5;
     private float currTimer;
-    
+    Light pointLight;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +28,8 @@ public class FlashLight : PlayerBase
         //get component examines
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
+        pointLight = GameObject.Find("PointLight")
+    .GetComponent<Light>();
     }
 
     //OverLoading flashlight
@@ -72,8 +74,6 @@ public class FlashLight : PlayerBase
 
             Light light = GameObject.Find("Spotlight")
                 .GetComponent<Light>();
-            Light pointLight = GameObject.Find("PointLight")
-                .GetComponent<Light>();
             //turn off the light while power battery become 0
             if (batLevel < 0)
             {
@@ -91,6 +91,8 @@ public class FlashLight : PlayerBase
         }
         else
         {
+            //pointlight disable
+            pointLight.enabled = false;
             PlayerController player = GameObject.FindGameObjectWithTag("Player")
              .GetComponent<PlayerController>();
             currTimer -= Time.deltaTime;
@@ -135,11 +137,13 @@ public class FlashLight : PlayerBase
             {
                 isLight = true;
                 hand.gameObject.SetActive(true);
+                pointLight.enabled = true;
             }
             else
             {
                 isLight = false;
                 hand.gameObject.SetActive(false);
+                pointLight.enabled = false;
             }
 
         }
