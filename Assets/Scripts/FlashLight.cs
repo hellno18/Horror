@@ -52,7 +52,7 @@ public class FlashLight : PlayerBase
             //while stress lv become 0
             if (player.StressLV < 0)
             {
-                player.StressLV -= 0;
+                player.StressLV = 0;
             }
 
             //decrease light power
@@ -80,6 +80,7 @@ public class FlashLight : PlayerBase
                 light.enabled = false;
                 pointLight.enabled = false;
                 batLevel = 0;
+                hand.gameObject.SetActive(false);
                 isLight = false;
             }
             else
@@ -133,7 +134,7 @@ public class FlashLight : PlayerBase
         if (Input.GetButtonUp("Flashlight") &&
             examines.GetExamineMode == false)
         {
-            if (!isLight)
+            if (!isLight&&batLevel>0)
             {
                 isLight = true;
                 hand.gameObject.SetActive(true);
