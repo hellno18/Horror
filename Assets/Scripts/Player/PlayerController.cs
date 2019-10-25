@@ -52,6 +52,7 @@ public class PlayerController : PlayerBase
                 if (currTimer < 0)
                 {
                     StressLV += 1;
+                    health -= 1;
                     currTimer = 3;
                 }
             }
@@ -60,6 +61,7 @@ public class PlayerController : PlayerBase
                 if (currTimer < 0)
                 {
                     StressLV += 1;
+                    health -= 1;
                     currTimer = 1;
                 }
             }
@@ -68,6 +70,7 @@ public class PlayerController : PlayerBase
                 if (currTimer < 0)
                 {
                     StressLV += 2;
+                    health -= 2;
                     currTimer = 1;
                 }
             }
