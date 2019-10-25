@@ -11,6 +11,7 @@ public class FlickerLamp : MonoBehaviour
     int smoothing = 5;
     Queue<float> smoothQueue;
     float lastSum = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,10 @@ public class FlickerLamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //random timer 
+        float timer = Random.Range(0, 5);
+        timer -= Time.deltaTime;
+
         if (light == null)
             return;
 
@@ -33,16 +38,25 @@ public class FlickerLamp : MonoBehaviour
         {
             lastSum -= smoothQueue.Dequeue();
         }
-
+       
         // Generate random new item, calculate new average
         float newVal = Random.Range(minIntensity, maxIntensity);
         smoothQueue.Enqueue(newVal);
         lastSum += newVal;
 
+        if (timer < 0)
+        {
+            timer = Random.Range(0, 3);
+            StartCoroutine("LightCoroutine");
+        }
+    }
+
+    IEnumerator LightCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
         // Calculate new smoothed average
         light.intensity = lastSum / (float)smoothQueue.Count;
     }
-
     void Reset()
     {
         smoothQueue.Clear();

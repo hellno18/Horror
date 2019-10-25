@@ -59,7 +59,7 @@ public class Examines : MonoBehaviour
 
                     //Now Move Object In Front Of Camera
                     clickedObject.transform.position = mainCam.transform.position 
-                        + (transform.forward)+(transform.forward);
+                        + (transform.forward)+(transform.forward/2);
 
                     //Pause The Game
                     Time.timeScale = 0;

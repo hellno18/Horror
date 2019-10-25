@@ -38,23 +38,6 @@ public class FlashLight : PlayerBase
         //if turn on light will decrease
         if (isLight)
         {
-            PlayerController player = GameObject.FindGameObjectWithTag("Player")
-             .GetComponent<PlayerController>();
-            //current time minus
-            currTimer -= Time.deltaTime;
-            // timer become 0
-            if (currTimer < 0)
-            {
-                player.StressLV -= 1;
-                currTimer = timer;
-            }
-
-            //while stress lv become 0
-            if (player.StressLV < 0)
-            {
-                player.StressLV = 0;
-            }
-
             //decrease light power
             batLevel -= Time.deltaTime;
 
@@ -94,40 +77,7 @@ public class FlashLight : PlayerBase
         {
             //pointlight disable
             pointLight.enabled = false;
-            PlayerController player = GameObject.FindGameObjectWithTag("Player")
-             .GetComponent<PlayerController>();
-            currTimer -= Time.deltaTime;
-            if (player.StressLV < 20)
-            {
-                if (currTimer < 0)
-                {
-                    player.StressLV += 1;
-                    //timer default 5 seconds
-                    currTimer = timer;
-                }
-            }
-            else if (player.StressLV > 20 && player.StressLV < 50)
-            {
-                if (currTimer < 0)
-                {
-                    player.StressLV += 1;
-                    currTimer = 3;
-                }
-            }
-            else if (player.StressLV >= 50 && player.StressLV < 100)
-            {
-                if (currTimer < 0)
-                {
-                    player.StressLV += 2;
-                    currTimer = 1;
-                }
-            }
-            else
-            {
-                player.StressLV = 100;
-                //Dead Show Slenderman face
-                //TODO
-            }
+           
         }
 
         //get input flashlight button

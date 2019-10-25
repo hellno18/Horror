@@ -8,7 +8,7 @@ public class DoorGenerator : MonoBehaviour
     bool isInteract;
     bool isOpen;
     // Smoothly open a door
-    private float doorOpenAngle = 90.0f; //Set either positive or negative number to open the door inwards or outwards
+    [SerializeField] private float doorOpenAngle = 90.0f; //Set either positive or negative number to open the door inwards or outwards
     private float openSpeed = 2.0f; //Increasing this value will make the door open faster
     private float defaultRotationAngle;
     private float currentRotationAngle;
