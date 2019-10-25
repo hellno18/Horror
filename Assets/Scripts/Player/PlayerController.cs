@@ -47,7 +47,7 @@ public class PlayerController : PlayerBase
                     currTimer = timer;
                 }
             }
-            else if (StressLV > 90 && StressLV < 120)
+            else if (StressLV >= 90 && StressLV < 120)
             {
                 if (currTimer < 0)
                 {
@@ -71,7 +71,7 @@ public class PlayerController : PlayerBase
                     currTimer = 1;
                 }
             }
-            else
+            else if(stressLV>160)
             {
                 StressLV = 160;
                 //Dead Show Slenderman face
