@@ -2,36 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door1 : MonoBehaviour
+public class DoorNormal : MonoBehaviour
 {
-
-    ElectroPanel electro;
+    [SerializeField] private GameObject door;
     bool isInteract;
     // Start is called before the first frame update
     void Start()
     {
-        //get component electropanel
-        electro = GameObject.Find("ElectoPanel/DetectElectro")
-            .GetComponent<ElectroPanel>();
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (electro.GetElectroPanel)
+       
+        if (isInteract)
         {
-            if (isInteract)
+        
+            if (Input.GetButtonDown("Interact"))
             {
-                //electro true
-                if (Input.GetButtonDown("Interact"))
-                {
-                    //play animation door
-                    GameObject.Find("Door1").GetComponent<Animator>()
-                        .SetBool("isOpen", true);
-                }
+                //play animation door
+                door.transform.Rotate(new Vector3(this.transform.rotation.x + 90, this.transform.rotation.y, this.transform.rotation.z));
             }
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
