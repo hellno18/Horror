@@ -32,8 +32,10 @@ public class Examines : MonoBehaviour
 
     private void Update()
     {
-       
+        //RaycastHit hit;
+        //Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
 
+        //Debug.DrawRay(ray.origin, ray.direction, Color.red);
         if (isInteract)
         {
             ClickObject();//Decide What Object To Examine
@@ -51,14 +53,13 @@ public class Examines : MonoBehaviour
     {
         if (examineMode)
         {
-           
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             // if object scrolled to front
             if (scroll < 0)
             {
                 if (i >= -0.2)
                 {
-                    clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                    clickedObject.transform.Translate(scroll * zoomSpeed, scroll * zoomSpeed, 0, Space.World);
                     i += scroll;
                 }
 
@@ -69,7 +70,7 @@ public class Examines : MonoBehaviour
             {
                 if (i <= 0.2)
                 {
-                    clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                    clickedObject.transform.Translate(scroll * zoomSpeed, scroll * zoomSpeed, 0, Space.World);
                     i += scroll;
                 }
             }
