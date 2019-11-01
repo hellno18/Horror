@@ -57,9 +57,11 @@ public class EnemySlender : EnemyBase
                 enemySpeed = 6f;
                 if (direction.magnitude < 3.5f)
                 {
-                    //destroy character
-                    Destroy(gameObject);
-                    //TODO spawn UI Dead
+                    player.GetComponent<PlayerController>().SetHealth = 
+                        player.GetComponent<PlayerController>().GetHealth-damage;
+                   //destroy character
+                   Destroy(gameObject);
+                   //TODO spawn UI Dead
                 }
                 
             }
@@ -110,7 +112,6 @@ public class EnemySlender : EnemyBase
     public void DamageHitEnemy(float damage)
     {
         enemyHealth -= damage;
-        
     }
 
 }

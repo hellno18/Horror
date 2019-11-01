@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     protected int stressLV=80;
-    protected int health = 100;
+    protected float health = 100;
 
     // Start is called before the first frame update
     void Start()

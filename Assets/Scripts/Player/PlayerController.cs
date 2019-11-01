@@ -77,6 +77,7 @@ public class PlayerController : PlayerBase
             else if(stressLV>160)
             {
                 StressLV = 160;
+                health -= 3;
                 //Dead Show Slenderman face
                 //TODO
             }
@@ -88,7 +89,7 @@ public class PlayerController : PlayerBase
 
 
     //Getter get Health
-    public int GetHealth
+    public float GetHealth
     {
         get
         {
@@ -97,7 +98,7 @@ public class PlayerController : PlayerBase
     }
 
     //Setter Health
-    public int SetHealth
+    public float SetHealth
     {
         set
         {
