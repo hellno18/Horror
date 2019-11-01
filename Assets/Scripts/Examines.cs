@@ -17,31 +17,62 @@ public class Examines : MonoBehaviour
     //if true allow to interact
     private bool isInteract;
 
+    //zoom speed
+    private float zoomSpeed = 1f;
+    float i=0;
     void Start()
     {
         //mainCam = Camera.main;
         mainCam = GameObject.FindGameObjectWithTag("MainCamera")
             .GetComponent<Camera>();
+
         examineMode = false;
         isInteract = false;
     }
 
     private void Update()
     {
+       
+
         if (isInteract)
         {
             ClickObject();//Decide What Object To Examine
+
+            ScrollObject();
 
             TurnObject();//Allows Object To Be Rotated
 
             ExitExamineMode();//Returns Object To Original Postion
         }
-        
+
+    }
+
+    void ScrollObject()
+    {
+        if (examineMode)
+        {
+           
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            // if object scrolled to front
+            if (scroll < 0&& (i >= -0.3 && i <= 0.3))
+            {
+                clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                i += scroll;
+
+            }
+            // if object scrolled to back
+            else if (scroll > 0&& (i >= -0.3 && i <= 0.3))
+            {
+                clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                 i += scroll;
+            }
+           
+        }
     }
 
     void ClickObject()
     {
-        if (Input.GetMouseButtonDown(0) && examineMode == false)
+        if (Input.GetMouseButtonDown(0) && !examineMode)
         {
             RaycastHit hit;
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
@@ -59,16 +90,18 @@ public class Examines : MonoBehaviour
 
                     //Now Move Object In Front Of Camera
                     clickedObject.transform.position = mainCam.transform.position 
-                        + (transform.forward)+(transform.forward/2);
+                        + (transform.forward);
 
                     //Pause The Game
                     Time.timeScale = 0;
 
                     //Turn Examine Mode To True
                     examineMode = true;
+
                 }
             }
         }
+       
     }
 
     void TurnObject()
@@ -76,10 +109,13 @@ public class Examines : MonoBehaviour
         if (Input.GetMouseButton(0) && examineMode)
         {
             float rotationSpeed = 15;
+            //speed scroll mouse
+           
 
             float xAxis = Input.GetAxis("Mouse X") * rotationSpeed;
             float yAxis = Input.GetAxis("Mouse Y") * rotationSpeed;
 
+           
             clickedObject.transform.Rotate(Vector3.up, -xAxis, Space.World);
             clickedObject.transform.Rotate(Vector3.right, yAxis, Space.World);
         }
@@ -98,6 +134,9 @@ public class Examines : MonoBehaviour
 
             //Return To Normal State
             examineMode = false;
+
+            //i become 0
+            i = 0;
         }
     }
 
