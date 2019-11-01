@@ -54,17 +54,24 @@ public class Examines : MonoBehaviour
            
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             // if object scrolled to front
-            if (scroll < 0&& (i >= -0.3 && i <= 0.3))
+            if (scroll < 0)
             {
-                clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
-                i += scroll;
+                if (i >= -0.2)
+                {
+                    clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                    i += scroll;
+                }
+
 
             }
             // if object scrolled to back
-            else if (scroll > 0&& (i >= -0.3 && i <= 0.3))
+            else if (scroll > 0)
             {
-                clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
-                 i += scroll;
+                if (i <= 0.2)
+                {
+                    clickedObject.transform.Translate(0, scroll * zoomSpeed, scroll * zoomSpeed, Space.World);
+                    i += scroll;
+                }
             }
            
         }
