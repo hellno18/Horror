@@ -6,16 +6,24 @@ using UnityEngine.UI;
 public class EnemyBase : MonoBehaviour
 {
     protected float enemyHealth = 100f;
+    protected float enemyHealthMax;
     protected float enemySpeed= 6.0f;
     protected int attack;
     protected NavMeshAgent navMesh;
     protected Animator animator;
     protected Slider enemyBar;
     protected float damage=25;
-    // Start is called before the first frame update
-    void Start()
-    {
+    protected Material mat;
 
+    private void OnEnable()
+    {
+        enemyHealthMax = enemyHealth;
+        //get component animator
+        animator = this.GetComponent<Animator>();
+        //get component navmeshagent
+        navMesh = this.GetComponent<NavMeshAgent>();
+        //get component material for shader
+        mat = this.GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame

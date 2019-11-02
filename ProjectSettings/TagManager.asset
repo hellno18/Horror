@@ -7,8 +7,9 @@ TagManager:
   - Battery
   - Item
   - Fire
-  - Slender
   - StressLV
+  - SlenderPatrol
+  - SlenderSpawn
   layers:
   - Default
   - TransparentFX

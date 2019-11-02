@@ -4,37 +4,30 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class EnemySlender : EnemyBase
+public class EnemySlenderNormal : EnemyBase
 {
-    [SerializeField] Transform[] points;
     Transform player;
     private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
-    Material mat;
     bool isDamage;
+    private Vector3 randomSpotPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyHealth = 100;
         //get component player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>(); ;
-        //get component navmeshagent
-        navMesh = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         //get component flashlight
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
-        //get component material for shader
-        mat = this.GetComponent<Renderer>().material;
-        //Find another point
-        GotoNextPoint();
     }
 
     protected override void Run()
     {  
-        enemyBar.value = enemyHealth/100;
+        enemyBar.value = enemyHealth/enemyHealthMax;
         if (enemyHealth < 0)
         {
             //Hide EnemyBar
@@ -43,7 +36,6 @@ public class EnemySlender : EnemyBase
         }
 
         Vector3 direction = player.position - this.transform.position;
-       // print(direction.magnitude);
         direction.y = 0;
         float angle = Vector3.Angle(direction, this.transform.forward);
         if (Vector3.Distance(player.position, this.transform.position) < 30 && angle < 180)
@@ -84,19 +76,16 @@ public class EnemySlender : EnemyBase
         }
     }
 
-    void GotoNextPoint()
+    private void GotoNextPoint()
     {
-        // Returns if no points have been set up
-        if (points.Length == 0)
-            return;
+        float x = Random.Range(0, 45);
+        float z = Random.Range(-55, -30);
+        randomSpotPoint = new Vector3(x, transform.position.y, z);
 
         // Set the agent to go to the currently selected destination.
-        navMesh.destination = points[destPoint].position;
-
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
-        destPoint = (destPoint + 1) % points.Length;
+        navMesh.destination = randomSpotPoint;
     }
+
 
     IEnumerator DissolveEnemyCoroutine()
     {

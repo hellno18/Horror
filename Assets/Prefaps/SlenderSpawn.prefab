@@ -1023,12 +1023,12 @@ GameObject:
   - component: {fileID: 4635387628181502}
   - component: {fileID: 137436602432895146}
   - component: {fileID: 80973970}
-  - component: {fileID: 8325978500415590011}
   - component: {fileID: 5563243691986805106}
   - component: {fileID: 1551602639}
+  - component: {fileID: 430430121908739373}
   m_Layer: 0
-  m_Name: Slender Prefab
-  m_TagString: Slender
+  m_Name: SlenderSpawn
+  m_TagString: SlenderSpawn
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,22 +1131,6 @@ CapsuleCollider:
   m_Height: 0.79131097
   m_Direction: 1
   m_Center: {x: 0.033814237, y: 0.40712914, z: 0.011141093}
---- !u!114 &8325978500415590011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1971239766532414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3ec08ba390dd547bf9fb7db1f053f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!195 &5563243691986805106
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1188,6 +1172,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &430430121908739373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971239766532414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf496e758848374f93a426c2f7a01ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1996585809318630
 GameObject:
   m_ObjectHideFlags: 0

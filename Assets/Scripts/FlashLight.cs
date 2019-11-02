@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class FlashLight : PlayerBase
 {
-    private bool isLight;
-    private float batLevel=50f;
-    private int batCount=0;
-    private float distance = 15f;
-    private float damage=0.5f;
-    private Transform hand;
-    private Camera mainCamera;
-    private EnemySlender enemySlender;
-    private Examines examines;
-    private float timer=5;
-    private float currTimer;
-    Light pointLight;
+    private bool isLight;               // Whether player is turned on light
+    private float batLevel=50f;          // The amount of battery level.
+    private int batCount=0;              // The amount of battery count.
+    private float distance = 15f;  //The distance in float between player and enemy.
+    private float damage=0.5f;      //damage flashlight.
+    private Transform hand;         // Reference to hand component.
+    private Camera mainCamera;      // Reference to camera component.
+    private Examines examines;               // Reference to examines component.
+    private Light pointLight;                // Reference to light component.
+    private float timer=5;              // Timer
+    private float currTimer;            //current timer
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,12 +46,19 @@ public class FlashLight : PlayerBase
             if (Physics.Raycast(this.mainCamera.transform.position,
                 this.mainCamera.transform.forward, out hit, distance))
             {
-                //Give damage to enemy with flashlight
-                if (hit.collider.tag == "Slender")
+                //Give damage to enemy with flashlight (slender patrol)
+                if (hit.collider.tag == "SlenderPatrol")
                 {
-                    enemySlender = hit.collider.transform.GetComponent<EnemySlender>();
-                    enemySlender.DamageHitEnemy(damage);
-                    enemySlender.GetComponent<Animator>().SetTrigger("Hit");
+                    EnemySlenderPatrol enemySlenderPatrol = hit.collider.transform.GetComponent<EnemySlenderPatrol>();
+                    enemySlenderPatrol.DamageHitEnemy(damage);
+                    enemySlenderPatrol.GetComponent<Animator>().SetTrigger("Hit");
+                }
+                //Give damage to enemy with flashlight (slender spawn)
+                else if (hit.collider.tag == "SlenderSpawn")
+                {
+                    EnemySlenderNormal enemySlenderNormal = hit.collider.transform.GetComponent<EnemySlenderNormal>();
+                    enemySlenderNormal.DamageHitEnemy(damage);
+                    enemySlenderNormal.GetComponent<Animator>().SetTrigger("Hit");
                 }
             }
 
@@ -99,7 +106,9 @@ public class FlashLight : PlayerBase
 
         }
 
-        //press reload flashlight
+        /*====================
+        *press reload flashlight
+        =====================*/
         if (Input.GetButtonUp("Reload"))
         {
             if (batCount > 0)
@@ -116,7 +125,9 @@ public class FlashLight : PlayerBase
         }
     }
 
-    //Getter Battery isLight
+    /*========================
+     *Getter Battery isLight
+     ========================*/   
     public bool GetIsLight
     {
         get
@@ -125,7 +136,9 @@ public class FlashLight : PlayerBase
         }
     }
 
-    //Getter Battery Light
+    /*====================
+    *Getter Battery Light
+    =====================*/
     public float GetBatLight
     {
         get
@@ -134,7 +147,9 @@ public class FlashLight : PlayerBase
         }
     }
 
-    //Setter Battery Light
+    /*====================
+    *Setter Battery Light
+    =====================*/
     public float SetBatLevel
     {
         set
@@ -144,7 +159,9 @@ public class FlashLight : PlayerBase
     }
 
 
-    //Getter Battery Count
+    /*====================
+    *Getter Battery Count
+    =====================*/
     public int GetBatCount
     {
         get
@@ -153,7 +170,9 @@ public class FlashLight : PlayerBase
         }
     }
 
-    //Setter Battery Count
+    /*====================
+    *Setter Battery Count
+    =====================*/
     public void SetBatCount()
     {
         batCount++;
