@@ -15,6 +15,9 @@ public class EnemySpawnTrigger : MonoBehaviour
         
     }
 
+    /*======================
+    * Spawn Enemy to spot point
+    ======================*/
     void Spawn()
     {
         // If the player has no health left...
@@ -27,6 +30,10 @@ public class EnemySpawnTrigger : MonoBehaviour
         Instantiate(enemy, spawnPoints.position, spawnPoints.rotation);
     }
 
+
+    /*======================
+    * when triggered
+    ======================*/
     private void OnTriggerEnter(Collider other)
     {
         //call spawn function and destroy this gameobject

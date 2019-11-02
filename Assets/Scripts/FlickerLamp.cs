@@ -51,12 +51,16 @@ public class FlickerLamp : MonoBehaviour
         }
     }
 
+    /*=============================
+    * Light coroutine make it smooth
+    ==============================*/
     IEnumerator LightCoroutine()
     {
         yield return new WaitForSeconds(2f);
         // Calculate new smoothed average
         light.intensity = lastSum / (float)smoothQueue.Count;
     }
+
     void Reset()
     {
         smoothQueue.Clear();

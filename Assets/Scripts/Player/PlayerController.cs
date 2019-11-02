@@ -87,8 +87,9 @@ public class PlayerController : PlayerBase
 
     }
 
-
-    //Getter get Health
+    /*======================
+    *Getter get Health
+    ======================*/
     public float GetHealth
     {
         get
@@ -97,7 +98,9 @@ public class PlayerController : PlayerBase
         }
     }
 
-    //Setter Health
+    /*======================
+    *Setter Health
+    ======================*/
     public float SetHealth
     {
         set
@@ -106,7 +109,10 @@ public class PlayerController : PlayerBase
         }
     }
 
-    //Setter Getter StressLV
+
+    /*======================
+    *Setter Getter StressLV
+    ======================*/
     public int StressLV
     {
         get

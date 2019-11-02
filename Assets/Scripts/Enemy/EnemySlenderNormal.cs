@@ -76,6 +76,9 @@ public class EnemySlenderNormal : EnemyBase
         }
     }
 
+    /*======================
+     * Go to another Point 
+     ======================*/
     private void GotoNextPoint()
     {
         float x = Random.Range(0, 45);
@@ -86,7 +89,9 @@ public class EnemySlenderNormal : EnemyBase
         navMesh.destination = randomSpotPoint;
     }
 
-
+    /*============================
+    * Dissolve material coroutine
+    ============================*/
     IEnumerator DissolveEnemyCoroutine()
     {
         timeDis += Time.deltaTime;
@@ -98,6 +103,9 @@ public class EnemySlenderNormal : EnemyBase
         }
     }
 
+    /*============================
+    * DamageHit to enemy
+    ============================*/
     public void DamageHitEnemy(float damage)
     {
         enemyHealth -= damage;

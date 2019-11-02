@@ -46,7 +46,10 @@ public class HUD : MonoBehaviour
         stressLVText.text = playerController.StressLV.ToString();
     }
 
-    //toggle G Button Display
+
+    /*=============================
+    * toggle G Button Display
+    ==============================*/
     public void GButtonDisplay()
     {
         is_gButton = !is_gButton;

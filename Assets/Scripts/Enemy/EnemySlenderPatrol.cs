@@ -84,6 +84,9 @@ public class EnemySlenderPatrol : EnemyBase
         }
     }
 
+    /*======================
+    * Go to another Point 
+    ======================*/
     void GotoNextPoint()
     {
         // Returns if no points have been set up
@@ -98,6 +101,9 @@ public class EnemySlenderPatrol : EnemyBase
         destPoint = (destPoint + 1) % points.Length;
     }
 
+    /*============================
+    * Dissolve material coroutine
+    ============================*/
     IEnumerator DissolveEnemyCoroutine()
     {
         timeDis += Time.deltaTime;
@@ -109,6 +115,9 @@ public class EnemySlenderPatrol : EnemyBase
         }
     }
 
+    /*============================
+    * DamageHit to enemy
+    ============================*/
     public void DamageHitEnemy(float damage)
     {
         enemyHealth -= damage;

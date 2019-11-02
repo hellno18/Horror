@@ -46,6 +46,9 @@ public class DoorNormal : MonoBehaviour
 
     }
 
+    /*=============================
+    * While collision trigger enter
+    ==============================*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -54,6 +57,9 @@ public class DoorNormal : MonoBehaviour
         }
     }
 
+    /*=============================
+    * While collision trigger exit
+    ==============================*/
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")

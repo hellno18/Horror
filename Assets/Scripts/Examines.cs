@@ -49,6 +49,9 @@ public class Examines : MonoBehaviour
 
     }
 
+    /*=============================
+    * scroll the object zoom in or out
+    ==============================*/
     void ScrollObject()
     {
         if (examineMode)
@@ -78,6 +81,9 @@ public class Examines : MonoBehaviour
         }
     }
 
+    /*=============================
+    * when object clicked
+    ==============================*/
     void ClickObject()
     {
         if (Input.GetMouseButtonDown(0) && !examineMode)
@@ -112,6 +118,9 @@ public class Examines : MonoBehaviour
        
     }
 
+    /*=============================
+    * the object can turn
+    ==============================*/
     void TurnObject()
     {
         if (Input.GetMouseButton(0) && examineMode)
@@ -129,6 +138,9 @@ public class Examines : MonoBehaviour
         }
     }
 
+    /*=============================
+    * exit examine mode
+    ==============================*/
     void ExitExamineMode()
     {
         if (Input.GetMouseButtonDown(1) && examineMode)

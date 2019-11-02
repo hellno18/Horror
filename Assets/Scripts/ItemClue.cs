@@ -22,7 +22,9 @@ public class ItemClue : MonoBehaviour
        
     }
 
-    //While collision
+    /*=============================
+    * While collision trigger enter
+    ==============================*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,6 +35,9 @@ public class ItemClue : MonoBehaviour
         }
     }
 
+    /*=============================
+    * While collision trigger exit
+    ==============================*/
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
