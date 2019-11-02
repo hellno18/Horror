@@ -2,7 +2,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class SubtitleDisplayer : MonoBehaviour
 {
   [SerializeField] private TextAsset subtitle;
@@ -61,11 +61,13 @@ public class SubtitleDisplayer : MonoBehaviour
       }
       else
       {
-        //Debug.Log("Subtitles ended");
+
         StartCoroutine(FadeTextOut(currentlyDisplayingText));
         yield return FadeTextOut(fadedOutText);
         currentlyDisplayingText.gameObject.SetActive(false);
         fadedOutText.gameObject.SetActive(false);
+        //Go to scene Hospital
+        SceneManager.LoadScene("Hospital");
         yield break;
       }
     }

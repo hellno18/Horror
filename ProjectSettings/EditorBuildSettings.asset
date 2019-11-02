@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Forest.unity
+    guid: fd6a1b0db3b320a4bac8b65ceb8220aa
+  - enabled: 1
+    path: Assets/Scenes/Hospital.unity
+    guid: ad71b93e4918b7a409cc43ae26fa1126
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
