@@ -33,8 +33,7 @@ public class Key : MonoBehaviour
                 examines.SetExamineMode(false);
             }
 
-            player.SetKeyCount();
-            print(player.KeyCount);
+            player.KeyCount++;
            //display hud
             hud.GButtonDisplay();
             //destroy

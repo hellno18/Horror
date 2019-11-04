@@ -135,13 +135,9 @@ public class PlayerController : PlayerBase
         {
             return keyCount;
         }
-    }
-
-    /*====================
-    *Setter KeyCount Count
-    =====================*/
-    public void SetKeyCount()
-    {
-        keyCount++;
+        set
+        {
+            keyCount =value;
+        }
     }
 }
