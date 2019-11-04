@@ -7,6 +7,7 @@ public class Battery : MonoBehaviour
     FlashLight flashlight;
     HUD hud;
     Examines examines;
+    bool isInteract;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +19,14 @@ public class Battery : MonoBehaviour
         //get component examine
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
+        isInteract = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         //get input "GRAB"
-        if (Input.GetButton("Grab"))
+        if (Input.GetButton("Grab")&& isInteract)
         {
             if (examines.GetExamineMode)
             {
@@ -51,6 +53,7 @@ public class Battery : MonoBehaviour
             hud.GButtonDisplay();
             //interact true
             examines.SetIsInteract(true);
+            isInteract = true;
         }
     }
 
@@ -65,6 +68,7 @@ public class Battery : MonoBehaviour
             hud.GButtonDisplay();
             //interact false
             examines.SetIsInteract(false);
+            isInteract = false;
         }
     }
 }

@@ -182,6 +182,15 @@ public class Examines : MonoBehaviour
         examineMode = examine;
     }
 
+    //getter isInteract
+    public bool GetInteract
+    {
+        get
+        {
+            return isInteract;
+        }
+    }
+
     //setter isinteract
     public void SetIsInteract(bool interact)
     {

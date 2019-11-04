@@ -6,11 +6,11 @@ public class PlayerBase : MonoBehaviour
 {
     protected int stressLV=80;
     protected float health = 100;
+    protected int keyCount;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-
+        keyCount = 0;
     }
 
     private void Update()

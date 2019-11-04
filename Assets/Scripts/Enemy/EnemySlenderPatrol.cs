@@ -115,12 +115,5 @@ public class EnemySlenderPatrol : EnemyBase
         }
     }
 
-    /*============================
-    * DamageHit to enemy
-    ============================*/
-    public void DamageHitEnemy(float damage)
-    {
-        enemyHealth -= damage;
-    }
 
 }

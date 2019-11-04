@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : MonoBehaviour, IDamage
 {
     protected float enemyHealth = 100f;
     protected float enemyHealthMax;
@@ -37,4 +37,13 @@ public class EnemyBase : MonoBehaviour
     {
 
     }
+
+    /*============================
+    * DamageHit to enemy
+    ============================*/
+    public void AddDamageEnemy(float damage)
+    {
+        enemyHealth -= damage;
+    }
+
 }

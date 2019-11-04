@@ -8,6 +8,7 @@ public class PlayerController : PlayerBase
     private float timer = 5;
     private float currTimer;
     FlashLight flashlight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -123,5 +124,24 @@ public class PlayerController : PlayerBase
         {
             stressLV = value;
         }
+    }
+
+    /*======================
+    *Setter Getter keyCount
+    ======================*/
+    public int KeyCount
+    {
+        get
+        {
+            return keyCount;
+        }
+    }
+
+    /*====================
+    *Setter KeyCount Count
+    =====================*/
+    public void SetKeyCount()
+    {
+        keyCount++;
     }
 }

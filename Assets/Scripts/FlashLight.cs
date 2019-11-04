@@ -13,6 +13,7 @@ public class FlashLight : PlayerBase
     private Camera mainCamera;      // Reference to camera component.
     private Examines examines;               // Reference to examines component.
     private Light pointLight;                // Reference to light component.
+
     private float timer=5;              // Timer
     private float currTimer;            //current timer
 
@@ -50,14 +51,18 @@ public class FlashLight : PlayerBase
                 if (hit.collider.tag == "SlenderPatrol")
                 {
                     EnemySlenderPatrol enemySlenderPatrol = hit.collider.transform.GetComponent<EnemySlenderPatrol>();
-                    enemySlenderPatrol.DamageHitEnemy(damage);
+                    var damageTarget = enemySlenderPatrol.GetComponent<IDamage>();
+                    if (damageTarget != null)
+                        damageTarget.AddDamageEnemy(damage);
                     enemySlenderPatrol.GetComponent<Animator>().SetTrigger("Hit");
                 }
                 //Give damage to enemy with flashlight (slender spawn)
                 else if (hit.collider.tag == "SlenderSpawn")
                 {
                     EnemySlenderNormal enemySlenderNormal = hit.collider.transform.GetComponent<EnemySlenderNormal>();
-                    enemySlenderNormal.DamageHitEnemy(damage);
+                    var damageTarget = enemySlenderNormal.GetComponent<IDamage>();
+                    if (damageTarget != null)
+                        damageTarget.AddDamageEnemy(damage);
                     enemySlenderNormal.GetComponent<Animator>().SetTrigger("Hit");
                 }
             }
