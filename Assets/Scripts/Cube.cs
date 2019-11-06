@@ -60,9 +60,9 @@ public class Cube : MonoBehaviour
         if (other.gameObject.CompareTag("Puzzle"))
         {
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPuzzle>();
-            //player.Puzzle+=1;
+            //Add count puzzle
             player.AddCountPuzzle();
-            print(player.GetCountPuzzle());
+            //print(player.GetCountPuzzle());
             isMatch = true;
             other.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
             //destroy puzzle

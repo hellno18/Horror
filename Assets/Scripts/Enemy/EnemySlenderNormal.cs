@@ -23,6 +23,7 @@ public class EnemySlenderNormal : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
+        GotoNextPoint();
     }
 
     protected override void Run()
@@ -38,31 +39,35 @@ public class EnemySlenderNormal : EnemyBase
         Vector3 direction = player.position - this.transform.position;
         direction.y = 0;
         float angle = Vector3.Angle(direction, this.transform.forward);
-        if (Vector3.Distance(player.position, this.transform.position) < 30 && angle < 180)
+        if (Vector3.Distance(player.position, this.transform.position) < 14 && angle < 180)
         {
+            //Play anim chase
+            animator.SetBool("Chase", true);
+            this.transform.position += this.transform.forward * enemySpeed * Time.deltaTime;
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
+                Quaternion.LookRotation(direction), 0.1f * Time.deltaTime * 50.0f);
+
             if (flashlight.GetIsLight)
             {
                 enemySpeed = 1.5f;
             }
             else
             {
-                enemySpeed = 6f;
+                enemySpeed = 3f;
                 if (direction.magnitude < 3.5f)
                 {
                     //Give Damage to player
                     player.GetComponent<PlayerController>().SetHealth = 
                         player.GetComponent<PlayerController>().GetHealth-damage;
-                   //destroy character
-                   Destroy(gameObject);
+                    animator.SetBool("Chase", false);
+                    //destroy character
+                    Destroy(gameObject);
                    //TODO spawn UI Dead
                 }
                 
             }
-            this.transform.position += this.transform.forward * enemySpeed * Time.deltaTime;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
-                Quaternion.LookRotation(direction), 0.1f * Time.deltaTime * 50.0f);
-
-            if (direction.magnitude > 5)
+            
+            if (direction.magnitude > 3)
             {
                 //chashing true
                 this.transform.Translate(0, 0, 0.05f);
@@ -83,7 +88,7 @@ public class EnemySlenderNormal : EnemyBase
     private void GotoNextPoint()
     {
         float x = Random.Range(0, 45);
-        float z = Random.Range(-55, -30);
+        float z = Random.Range(0, -30);
         randomSpotPoint = new Vector3(x, transform.position.y, z);
 
         // Set the agent to go to the currently selected destination.
