@@ -6,11 +6,15 @@ public class ElectroPanel : MonoBehaviour
 {
     bool isDoorOn;
     bool isInteract;
+    HUD hud;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         isDoorOn = false;
+        hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -21,6 +25,7 @@ public class ElectroPanel : MonoBehaviour
             if (Input.GetButtonDown("Interact"))
             {
                 isDoorOn = true;
+                audioManager.PlaySE("EMotorDoor");
             }
         }
        
@@ -34,6 +39,7 @@ public class ElectroPanel : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = true;
+            StartCoroutine(CButtonCoroutine());
         }
     }
 
@@ -46,6 +52,13 @@ public class ElectroPanel : MonoBehaviour
         {
             isInteract = false;
         }
+    }
+
+    IEnumerator CButtonCoroutine()
+    {
+        hud.CButtonDisplay();
+        yield return new WaitForSeconds(1f);
+        hud.CButtonDisplay();
     }
 
     public bool GetElectroPanel

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorGenerator : MonoBehaviour
 {
     ElectroPanel electro;
+    HUD hud;
     bool isInteract;
     bool isOpen;
     // Smoothly open a door
@@ -19,6 +20,8 @@ public class DoorGenerator : MonoBehaviour
         //get component electropanel
         electro = GameObject.Find("ElectoPanel/DetectElectro")
             .GetComponent<ElectroPanel>();
+        //get component HUD
+        hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         defaultRotationAngle = transform.localEulerAngles.x;
         currentRotationAngle = transform.localEulerAngles.x;
     }
@@ -53,6 +56,16 @@ public class DoorGenerator : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = true;
+            if (!electro.GetElectroPanel)
+            {
+                //Show hud "broken"
+                print("Broken");
+            }
+            else
+            {
+                //show hud press interact
+                StartCoroutine(CButtonCoroutine());
+            }
         }
     }
 
@@ -64,6 +77,17 @@ public class DoorGenerator : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = false;
+            if (!electro.GetElectroPanel)
+            {
+                //Show hud "broken"
+            }
         }
+    }
+
+    IEnumerator CButtonCoroutine()
+    {
+        hud.CButtonDisplay();
+        yield return new WaitForSeconds(1f);
+        hud.CButtonDisplay();
     }
 }
