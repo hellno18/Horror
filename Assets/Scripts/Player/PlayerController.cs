@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerController : PlayerBase
+public class PlayerController : PlayerBase, IPuzzle,IKey
 {
     private float timer = 5;
     private float currTimer;
@@ -83,9 +83,6 @@ public class PlayerController : PlayerBase
                 //TODO
             }
         }
-
-
-
     }
 
     /*======================
@@ -129,30 +126,29 @@ public class PlayerController : PlayerBase
     /*======================
     *Setter Getter keyCount
     ======================*/
-    public int KeyCount
+    public int GetKeyCount()
     {
-        get
-        {
-            return keyCount;
-        }
-        set
-        {
-            keyCount =value;
-        }
+        return keyCount;
+    }
+    public int AddKeyCount()
+    {
+        return keyCount++;
+    }
+    public int RemoveKeyCount()
+    {
+        return keyCount--;
     }
     /*======================
     *Setter Getter Puzzle
     ======================*/
-    public int Puzzle
+    public int GetCountPuzzle()
     {
-        get
-        {
-            return puzzle;
-        }
-        set
-        {
-            puzzle = value;
-        }
+         return puzzle;
+    }
+
+    public int AddCountPuzzle()
+    {
+        return puzzle++;
     }
 
 }

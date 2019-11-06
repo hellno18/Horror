@@ -55,6 +55,7 @@ public class EnemySlenderPatrol : EnemyBase
                 enemySpeed = 6f;
                 if (direction.magnitude < 3.5f)
                 {
+                    //Give Damage to player
                     player.GetComponent<PlayerController>().SetHealth = 
                         player.GetComponent<PlayerController>().GetHealth-damage;
                     animator.SetBool("Chase", false);

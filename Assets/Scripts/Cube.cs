@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Cube : MonoBehaviour
 {
     //Global Variable
-    PlayerController player;
     HUD hud;
     private bool hold;
     private bool isMatch;
@@ -16,8 +15,6 @@ public class Cube : MonoBehaviour
     {
         this.transform.parent = null;
         isMatch = false;
-        //Get component player
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         //Get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
     }
@@ -28,18 +25,17 @@ public class Cube : MonoBehaviour
         if (isMatch) {
             hold = false;
         } 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Interact"))
         {
             hold = true;
         }
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetButtonUp("Interact"))
         {
             hold = false;
         }
         if (!hold)
         {
             this.transform.parent = null;
-            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -63,8 +59,10 @@ public class Cube : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Puzzle"))
         {
-            player.Puzzle+=1;
-            print(player.Puzzle);
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPuzzle>();
+            //player.Puzzle+=1;
+            player.AddCountPuzzle();
+            print(player.GetCountPuzzle());
             isMatch = true;
             other.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
             //destroy puzzle

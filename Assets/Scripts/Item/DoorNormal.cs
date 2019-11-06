@@ -13,20 +13,19 @@ public class DoorNormal : MonoBehaviour
     private float defaultRotationAngle;
     private float currentRotationAngle;
     private float openTime = 0;
-    private PlayerController player; // reference to player controller component
+    //private PlayerController player; // reference to player controller component
 
     // Start is called before the first frame update
     void Start()
     {
         defaultRotationAngle = transform.localEulerAngles.x;
-        currentRotationAngle = transform.localEulerAngles.x;
-        player = GameObject.FindGameObjectWithTag("Player")
-            .GetComponent<PlayerController>();
+        currentRotationAngle = transform.localEulerAngles.x;        
     }
 
     // Update is called once per frame
     void Update()
     {
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();
         if (openTime < 1)
         {
             openTime += Time.deltaTime * openSpeed;
@@ -41,10 +40,11 @@ public class DoorNormal : MonoBehaviour
             currentRotationAngle = transform.localEulerAngles.x;
             openTime = 0;
         }
-        else if(Input.GetButtonDown("Unlock")&&isInteract&& player.KeyCount>0)
+        else if(Input.GetButtonDown("Unlock")&&isInteract&& player.GetKeyCount()>0)
         {
             islocked = false;
-            player.KeyCount--;
+            
+            player.RemoveKeyCount();
         }
 
 

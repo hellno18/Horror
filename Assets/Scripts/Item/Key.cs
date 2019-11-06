@@ -6,14 +6,14 @@ public class Key : MonoBehaviour
 {
     HUD hud;
     Examines examines;
-    PlayerController player;
+    //PlayerController player;
 
     bool isInteract;
     // Start is called before the first frame update
     private void Awake()
     {
         //get component player controller
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         //get component examine
@@ -32,8 +32,8 @@ public class Key : MonoBehaviour
                 examines.UnPause();
                 examines.SetExamineMode(false);
             }
-
-            player.KeyCount++;
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();
+            player.AddKeyCount();
            //display hud
             hud.GButtonDisplay();
             //destroy
