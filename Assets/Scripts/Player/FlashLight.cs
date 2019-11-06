@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlashLight : PlayerBase
 {
+    private bool isBringTorch;          // Whether player is bring torch
     private bool isLight;               // Whether player is turned on light
     private float batLevel=50f;          // The amount of battery level.
     private int batCount=0;              // The amount of battery count.
@@ -20,6 +21,8 @@ public class FlashLight : PlayerBase
     // Start is called before the first frame update
     void Start()
     {
+        //bringTorch false
+        isBringTorch = false;
         currTimer = timer;
         //light off
         isLight = false;
@@ -94,7 +97,7 @@ public class FlashLight : PlayerBase
 
         //get input flashlight button
         if (Input.GetButtonUp("Flashlight") &&
-            examines.GetExamineMode == false)
+            !examines.GetExamineMode  && isBringTorch)
         {
             if (!isLight&&batLevel>0)
             {
@@ -131,8 +134,19 @@ public class FlashLight : PlayerBase
     }
 
     /*========================
+    *Setter isBringTorch
+    ========================*/
+    public bool SetIsBringTorch
+    {
+        set
+        {
+            isBringTorch=value;
+        }
+    }
+
+    /*========================
      *Getter Battery isLight
-     ========================*/   
+     ========================*/
     public bool GetIsLight
     {
         get

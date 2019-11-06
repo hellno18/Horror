@@ -7,7 +7,9 @@ using TMPro;
 public class HUD : MonoBehaviour
 {
     private Transform gButton;
+    private Transform cButton;
     private bool is_gButton;
+    private bool is_cButton;
     private GameObject player;
     private FlashLight flashlight;
     private PlayerController playerController;
@@ -19,7 +21,10 @@ public class HUD : MonoBehaviour
     {
         //Grab button
         gButton = this.transform.Find("GrabButton[G]");
+        //Interact button
+        cButton = this.transform.Find("InteractButton[C]");
         is_gButton = false;
+        is_cButton = false;
         //Find player
         player = GameObject.FindGameObjectWithTag("Player");
         //get component health
@@ -60,6 +65,19 @@ public class HUD : MonoBehaviour
         else
         {
             gButton.gameObject.SetActive(false);
+        }
+    }
+
+    public void CButtonDisplay()
+    {
+        is_cButton = !is_cButton;
+        if (is_cButton)
+        {
+            cButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            cButton.gameObject.SetActive(false);
         }
     }
 }

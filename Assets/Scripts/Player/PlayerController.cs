@@ -140,5 +140,19 @@ public class PlayerController : PlayerBase
             keyCount =value;
         }
     }
+    /*======================
+    *Setter Getter Puzzle
+    ======================*/
+    public int Puzzle
+    {
+        get
+        {
+            return puzzle;
+        }
+        set
+        {
+            puzzle = value;
+        }
+    }
 
 }
