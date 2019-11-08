@@ -84,35 +84,23 @@ public class EnemySlenderNormal : EnemyBase
         {
             //idle and find another to patrol
             GotoNextPoint();
+            
         }
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Door")
-        {
-           // GotoNextPoint();
-        }
-
-        if(other.gameObject.tag == "WallPuzzle")
-        {
-            print("asd");
-            //GotoNextPoint();
-           
-        }
-    }
 
     /*======================
      * Go to another Point 
      ======================*/
     private void GotoNextPoint()
     {
-        float x = Random.Range(0, 45);
+        float x = Random.Range(0, 30);
         float z = Random.Range(0, -30);
         randomSpotPoint = new Vector3(x, transform.position.y, z);
 
         // Set the agent to go to the currently selected destination.
         navMesh.destination = randomSpotPoint;
+        
     }
 
     /*============================
