@@ -12,6 +12,7 @@ TagManager:
   - SlenderSpawn
   - Puzzle
   - Door
+  - WallPuzzle
   layers:
   - Default
   - TransparentFX

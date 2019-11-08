@@ -50,6 +50,7 @@ public class DoorNormal : MonoBehaviour
 
     }
 
+   
     /*=============================
     * While collision trigger enter
     ==============================*/
@@ -71,4 +72,21 @@ public class DoorNormal : MonoBehaviour
             isInteract = false;
         }
     }
+
+    /*=============================
+   * SETTER GETTER isOpen
+   ==============================*/
+
+    public bool IsOpenFunc
+    {
+        get
+        {
+            return isOpen;
+        }
+        set
+        {
+            isOpen = value;
+        }
+    }
+
 }

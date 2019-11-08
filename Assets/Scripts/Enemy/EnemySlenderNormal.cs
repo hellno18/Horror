@@ -10,6 +10,8 @@ public class EnemySlenderNormal : EnemyBase
     private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
+
+    bool changeRoute;
     bool isDamage;
     private Vector3 randomSpotPoint;
 
@@ -23,6 +25,8 @@ public class EnemySlenderNormal : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
+        //changeRoute bool
+        changeRoute = false;
         GotoNextPoint();
     }
 
@@ -37,6 +41,7 @@ public class EnemySlenderNormal : EnemyBase
         }
 
         Vector3 direction = player.position - this.transform.position;
+       //print(Vector3.Distance(player.position, this.transform.position));
         direction.y = 0;
         float angle = Vector3.Angle(direction, this.transform.forward);
         if (Vector3.Distance(player.position, this.transform.position) < 14 && angle < 180)
@@ -79,6 +84,21 @@ public class EnemySlenderNormal : EnemyBase
         {
             //idle and find another to patrol
             GotoNextPoint();
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Door")
+        {
+           // GotoNextPoint();
+        }
+
+        if(other.gameObject.tag == "WallPuzzle")
+        {
+            print("asd");
+            //GotoNextPoint();
+           
         }
     }
 
