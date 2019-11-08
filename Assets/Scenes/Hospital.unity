@@ -11156,12 +11156,12 @@ PrefabInstance:
     - target: {fileID: 6728977347604972597, guid: 987d26ca55985844489a4faf29a2857c,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 65
+      value: 73
       objectReference: {fileID: 0}
     - target: {fileID: 6728977347604972597, guid: 987d26ca55985844489a4faf29a2857c,
         type: 3}
       propertyPath: m_NavMeshLayer
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 987d26ca55985844489a4faf29a2857c, type: 3}
@@ -15271,16 +15271,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4074302290136810822, guid: 53ecb5d0b7a74ac46b93a4b3bc4722b3,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.36
-      objectReference: {fileID: 0}
     - target: {fileID: 4074302290136810821, guid: 53ecb5d0b7a74ac46b93a4b3bc4722b3,
         type: 3}
       propertyPath: spawnPoints
       value: 
       objectReference: {fileID: 466512946}
+    - target: {fileID: 4074302290136810822, guid: 53ecb5d0b7a74ac46b93a4b3bc4722b3,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.36
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ecb5d0b7a74ac46b93a4b3bc4722b3, type: 3}
 --- !u!1 &1767674486
