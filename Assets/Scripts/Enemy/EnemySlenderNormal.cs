@@ -55,7 +55,7 @@ public class EnemySlenderNormal : EnemyBase
         }
         //calculate distance with player and enemy
         distance = Vector3.Distance(player.position, this.transform.position);
-        print(distance);
+        //print(distance);
         if (distance < seeSight)
         {
             if (flashlight.GetIsLight)
@@ -102,15 +102,13 @@ public class EnemySlenderNormal : EnemyBase
                 animator.SetBool("Chase", false);
                 animator.SetTrigger("Attack");
                 attackSpeed -= Time.deltaTime;
-                if (attackSpeed < 0)
-                {
-                    attackSpeed = 1;
-                    //Give Damage to player
-                    DamageToPlayer();
-                }
-
+                /*
+                attackSpeed -= Time.deltaTime;
+                
+                */
                 break;
             case EnemyState.walk:
+                animator.SetBool("Chase", false);
                 if (enemyType == EnemyType.normal)
                     if (navMesh.remainingDistance < 0.5f)
                         GotoNextPoint();
@@ -175,7 +173,19 @@ public class EnemySlenderNormal : EnemyBase
         }
     }
 
-    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (attackSpeed < 0)
+            {
+                attackSpeed = 1;
+                //Give Damage to player
+                DamageToPlayer();
+            }
+        }
+    }
+
 
     /*============================
     * DamageHit to enemy

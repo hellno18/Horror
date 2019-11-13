@@ -1512,10 +1512,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.7770001
       objectReference: {fileID: 0}
-    - target: {fileID: 80973970, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1523,26 +1519,6 @@ PrefabInstance:
     - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 430430121908739373, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: seeSight
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 430430121908739373, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: far
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 430430121908739373, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: distance
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 430430121908739373, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: enemyType
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}

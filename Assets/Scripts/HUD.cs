@@ -18,6 +18,7 @@ public class HUD : MonoBehaviour
     private Slider batterySystem;
     private Slider healthSystem;
     private TextMeshProUGUI stressLVText;
+    private Transform tutorialFlashlight;
     // Start is called before the first frame update
     void Awake()
     {
@@ -44,8 +45,8 @@ public class HUD : MonoBehaviour
             .GetComponent<TextMeshProUGUI>();
         //get component stamina
         staminaSystem = transform.Find("Stamina System").GetComponent<Image>();
-
-
+        //get component tutorial Flashlight
+        tutorialFlashlight = transform.Find("TutorialFlashLight").GetComponent<Transform>();
 
     }
 
@@ -63,6 +64,16 @@ public class HUD : MonoBehaviour
         else staminaSystem.transform.gameObject.SetActive(false);
     }
 
+    /*============================
+     * Tutorial flashlight
+     ============================*/
+    public IEnumerator TutorialFLCoroutine()
+    {
+        tutorialFlashlight.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        tutorialFlashlight.gameObject.SetActive(false);
+        yield break;
+    }
 
     /*=============================
     * toggle G Button Display

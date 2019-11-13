@@ -99,19 +99,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772362224}
-  m_LocalRotation: {x: -0, y: -0.1839395, z: -0, w: 0.98293763}
-  m_LocalPosition: {x: 0, y: 0, z: 17.103}
-  m_LocalScale: {x: 0.028412012, y: 0.007193643, z: 0.007193643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2028713278}
   - {fileID: 858772278}
   - {fileID: 1335653857}
   m_Father: {fileID: 1825612852}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -21.199001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -380.62, y: -202.6}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &772362226
@@ -339,18 +339,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825612851}
-  m_LocalRotation: {x: -0, y: 0.98570335, z: -0, w: -0.1684902}
-  m_LocalPosition: {x: 0, y: 0, z: 13.655609}
-  m_LocalScale: {x: 0.09454479, y: 0.094544776, z: 0.09454479}
+  m_LocalRotation: {x: 0.26747462, y: -0.009062778, z: 0.0011690686, w: 0.96352166}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1859}
+  m_LocalScale: {x: -0.0014069328, y: 0.00051607704, z: 0}
   m_Children:
   - {fileID: 772362225}
   m_Father: {fileID: 4635387628181502}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -33.36895, y: 20.005674}
-  m_SizeDelta: {x: 756, y: 425}
+  m_LocalEulerAnglesHint: {x: 31.028002, y: -1.126, z: -0.17400001}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0333, y: 0.7461}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1825612855
 Canvas:
@@ -679,6 +679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698176015311544}
+  - component: {fileID: 6481675547133540753}
   m_Layer: 0
   m_Name: Right_Wrist
   m_TagString: Untagged
@@ -700,6 +701,19 @@ Transform:
   m_Father: {fileID: 4444761789722148}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.0008383, y: 15.928914, z: -2.3820748}
+--- !u!135 &6481675547133540753
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264441851946372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.065
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1304960317855288
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4530575043083014}
+  - component: {fileID: 5957388137574203663}
   m_Layer: 0
   m_Name: Left_wrist
   m_TagString: Untagged
@@ -761,6 +776,19 @@ Transform:
   m_Father: {fileID: 4473862692939710}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -8.020559, y: -0.25598383, z: 2.0639977}
+--- !u!135 &5957388137574203663
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378459348092420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.065
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1460059637542168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1154,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971239766532414}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.1
   m_Height: 0.79131097
@@ -1185,10 +1213,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf496e758848374f93a426c2f7a01ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 1
   attackSpeed: 1
-  seeSight: 10
-  distance: 3
-  far: 2.7
+  seeSight: 6
+  distance: 2.8
+  far: 1.8
+  points: []
 --- !u!54 &3100029939273485720
 Rigidbody:
   m_ObjectHideFlags: 0
