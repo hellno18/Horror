@@ -10,7 +10,9 @@ public class EnemySlenderNormal : EnemyBase
     private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
-
+    float MaxDist = 10f;
+    float MinDist = 2.0f;
+    bool isChase;
     bool changeRoute;
     bool isDamage;
     private Vector3 randomSpotPoint;
@@ -27,6 +29,7 @@ public class EnemySlenderNormal : EnemyBase
         enemyBar = this.GetComponentInChildren<Slider>();
         //changeRoute bool
         changeRoute = false;
+        isChase = false;
         GotoNextPoint();
     }
 
@@ -44,8 +47,9 @@ public class EnemySlenderNormal : EnemyBase
        //print(Vector3.Distance(player.position, this.transform.position));
         direction.y = 0;
         float angle = Vector3.Angle(direction, this.transform.forward);
-        if (Vector3.Distance(player.position, this.transform.position) < 14 && angle < 180)
+        if (Vector3.Distance(player.position, this.transform.position) > 3 && Vector3.Distance(player.position, this.transform.position) < 14 && angle < 180)
         {
+            isChase = true;
             //Play anim chase
             animator.SetBool("Chase", true);
             this.transform.position += this.transform.forward * enemySpeed * Time.deltaTime;
@@ -54,30 +58,37 @@ public class EnemySlenderNormal : EnemyBase
 
             if (flashlight.GetIsLight)
             {
-                enemySpeed = 1.5f;
+                enemySpeed = 1f;
             }
             else
             {
-                enemySpeed = 3f;
-                if (direction.magnitude < 3.5f)
+                enemySpeed = 2f;
+                if (direction.magnitude < 2f)
                 {
                     //Give Damage to player
-                    player.GetComponent<PlayerController>().SetHealth = 
-                        player.GetComponent<PlayerController>().GetHealth-damage;
-                    animator.SetBool("Chase", false);
+                    //
+                    //
                     //destroy character
-                    Destroy(gameObject);
+                   // Destroy(gameObject);
                    //TODO spawn UI Dead
                 }
                 
+                
             }
-            
-            if (direction.magnitude > 3)
+            print(direction.magnitude);
+            if (Vector3.Distance(player.position, this.transform.position)>= MinDist)
             {
                 //chashing true
-                this.transform.Translate(0, 0, 0.05f);
+                if(isChase) transform.position += transform.forward * enemySpeed * Time.deltaTime;
             }
-
+            if (Vector3.Distance(player.position, this.transform.position) < 3)
+            {
+                isChase = false;
+                animator.SetBool("Chase", false);
+                player.GetComponent<PlayerController>().SetHealth =
+                    player.GetComponent<PlayerController>().GetHealth - damage;
+            }
+          
         }
        
         else if (navMesh.remainingDistance < 0.5f)
@@ -116,6 +127,8 @@ public class EnemySlenderNormal : EnemyBase
             Destroy(gameObject);
         }
     }
+
+    
 
     /*============================
     * DamageHit to enemy

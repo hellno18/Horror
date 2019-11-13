@@ -111,7 +111,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 recovery -= Time.deltaTime;
                 speed = 0;
-                print(recovery);
                 if (recovery < 0)
                 {
                     recovery = 0;
