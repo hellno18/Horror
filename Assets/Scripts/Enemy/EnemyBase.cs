@@ -5,6 +5,14 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 public class EnemyBase : MonoBehaviour, IDamage
 {
+    protected enum EnemyState
+    {
+        walk,
+        attack,
+        chase
+    }
+
+    protected EnemyState enemyState;
     protected float enemyHealth = 100f;
     protected float enemyHealthMax;
     protected float enemySpeed= 6.0f;

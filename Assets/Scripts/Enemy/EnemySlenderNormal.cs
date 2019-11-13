@@ -6,15 +6,24 @@ using UnityEngine.UI;
 
 public class EnemySlenderNormal : EnemyBase
 {
+    public enum EnemyType
+    {
+        patrol,
+        normal
+    }
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private float seeSight = 8f;
+    [SerializeField] private float distance;
+    [SerializeField] private float far = 1.5f;
+    [SerializeField] private Transform[] points;
     Transform player;
     private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
-    float MaxDist = 10f;
-    float MinDist = 2.0f;
-    bool isChase;
     bool changeRoute;
     bool isDamage;
+
     private Vector3 randomSpotPoint;
 
     // Start is called before the first frame update
@@ -29,76 +38,95 @@ public class EnemySlenderNormal : EnemyBase
         enemyBar = this.GetComponentInChildren<Slider>();
         //changeRoute bool
         changeRoute = false;
-        isChase = false;
+        navMesh.speed=2.5f;
+
         GotoNextPoint();
     }
 
     protected override void Run()
-    {  
-        enemyBar.value = enemyHealth/enemyHealthMax;
+    {
+        //Health Bar
+        enemyBar.value = enemyHealth / enemyHealthMax;
         if (enemyHealth < 0)
         {
             //Hide EnemyBar
             enemyBar.gameObject.SetActive(false);
             StartCoroutine("DissolveEnemyCoroutine");
         }
-
-        Vector3 direction = player.position - this.transform.position;
-       //print(Vector3.Distance(player.position, this.transform.position));
-        direction.y = 0;
-        float angle = Vector3.Angle(direction, this.transform.forward);
-        if (Vector3.Distance(player.position, this.transform.position) > 3 && Vector3.Distance(player.position, this.transform.position) < 14 && angle < 180)
+        //calculate distance with player and enemy
+        distance = Vector3.Distance(player.position, this.transform.position);
+        print(distance);
+        if (distance < seeSight)
         {
-            isChase = true;
-            //Play anim chase
-            animator.SetBool("Chase", true);
-            this.transform.position += this.transform.forward * enemySpeed * Time.deltaTime;
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
-                Quaternion.LookRotation(direction), 0.1f * Time.deltaTime * 50.0f);
-
             if (flashlight.GetIsLight)
             {
-                enemySpeed = 1f;
+                navMesh.speed = 1;
             }
             else
             {
-                enemySpeed = 2f;
-                if (direction.magnitude < 2f)
-                {
-                    //Give Damage to player
-                    //
-                    //
-                    //destroy character
-                   // Destroy(gameObject);
-                   //TODO spawn UI Dead
-                }
-                
-                
+                navMesh.speed = 2.5f;
             }
-            print(direction.magnitude);
-            if (Vector3.Distance(player.position, this.transform.position)>= MinDist)
+            //CHASE
+            enemyState = EnemyState.chase;
+            var targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+
+            // Smoothly rotate towards the target point.
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1 * Time.deltaTime);
+
+            //follow player
+            navMesh.isStopped = false;
+            navMesh.SetDestination(player.position);
+            //related between distance and far with player
+            if (distance < far)
             {
-                //chashing true
-                if(isChase) transform.position += transform.forward * enemySpeed * Time.deltaTime;
+                //stop nav agent
+                navMesh.isStopped = true;
+                navMesh.velocity = Vector3.zero;
+                            
+                //Attack state
+                enemyState = EnemyState.attack;
             }
-            if (Vector3.Distance(player.position, this.transform.position) < 3)
-            {
-                isChase = false;
-                animator.SetBool("Chase", false);
-                player.GetComponent<PlayerController>().SetHealth =
-                    player.GetComponent<PlayerController>().GetHealth - damage;
-            }
-          
         }
-       
-        else if (navMesh.remainingDistance < 0.5f)
+        //Doesn't see anything --> random walk
+        else
         {
-            //idle and find another to patrol
-            GotoNextPoint();
-            
+            enemyState= EnemyState.walk;
+        }
+        switch (enemyState)
+        {
+            case EnemyState.chase:
+                //chase animation
+                animator.SetBool("Chase", true);
+                break;
+            case EnemyState.attack:
+                animator.SetBool("Chase", false);
+                animator.SetTrigger("Attack");
+                attackSpeed -= Time.deltaTime;
+                if (attackSpeed < 0)
+                {
+                    attackSpeed = 1;
+                    //Give Damage to player
+                    DamageToPlayer();
+                }
+
+                break;
+            case EnemyState.walk:
+                if (enemyType == EnemyType.normal)
+                    if (navMesh.remainingDistance < 0.5f)
+                        GotoNextPoint();
+                else if(enemyType == EnemyType.patrol)
+                {
+                   GoToPatrol();
+                }
+                break;
         }
     }
 
+    private void DamageToPlayer()
+    {
+        player.GetComponent<PlayerController>().SetHealth =
+                            player.GetComponent<PlayerController>().GetHealth - damage;
+    }
 
     /*======================
      * Go to another Point 
@@ -113,6 +141,25 @@ public class EnemySlenderNormal : EnemyBase
         navMesh.destination = randomSpotPoint;
         
     }
+
+    /*======================
+    * Go to Patrol Point 
+    ======================*/
+    void GoToPatrol()
+    {
+        // Returns if no points have been set up
+        if (points.Length == 0)
+            return;
+
+        // Set the agent to go to the currently selected destination.
+        navMesh.destination = points[destPoint].position;
+
+        // Choose the next point in the array as the destination,
+        // cycling to the start if necessary.
+        destPoint = (destPoint + 1) % points.Length;
+    }
+
+
 
     /*============================
     * Dissolve material coroutine
