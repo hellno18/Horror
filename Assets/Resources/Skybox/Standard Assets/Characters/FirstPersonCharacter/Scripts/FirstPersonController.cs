@@ -27,6 +27,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private float defaultStamina = 5f;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -41,6 +42,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        private float stamina;
+      
+        private bool isPressed;
 
         // Use this for initialization
         private void Start()
@@ -55,6 +59,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            isPressed = false;
+            stamina = defaultStamina;
         }
 
 
@@ -96,6 +102,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             float speed;
             GetInput(out speed);
+            if (Input.GetKeyDown(KeyCode.LeftShift))  isPressed = true;
+            if (Input.GetKeyUp(KeyCode.LeftShift)) isPressed = false;
+            if (isPressed)
+            {
+                stamina -= Time.deltaTime;
+                if (stamina < 0)
+                {
+                    stamina = 0;
+                    speed = 0;
+                }
+                //print(stamina);
+            }
+            if (!isPressed)
+            {
+                stamina += Time.deltaTime;
+                if (stamina > defaultStamina)
+                {
+                    stamina = defaultStamina;
+                }
+            }
+
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
 
@@ -255,5 +282,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        //Getter stamina
+        public float GetStamina
+        {
+            get
+            {
+                return stamina;
+            }
+        }
+        public float GetStaminaDefault
+        {
+            get
+            {
+                return defaultStamina;
+            }
+        }
     }
+   
 }

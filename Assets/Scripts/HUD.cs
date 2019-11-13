@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class HUD : MonoBehaviour
 {
     private Transform gButton;
     private Transform cButton;
+    private Image staminaSystem;
     private bool is_gButton;
     private bool is_cButton;
     private GameObject player;
@@ -40,7 +42,11 @@ public class HUD : MonoBehaviour
         stressLVText = GameObject
             .FindGameObjectWithTag("StressLV")
             .GetComponent<TextMeshProUGUI>();
-        
+        //get component stamina
+        staminaSystem = transform.Find("Stamina System").GetComponent<Image>();
+
+
+
     }
 
     // Update is called once per frame
@@ -49,6 +55,12 @@ public class HUD : MonoBehaviour
         batterySystem.value = flashlight.GetBatLight/100;
         healthSystem.value = playerController.GetHealth / 100;
         stressLVText.text = playerController.StressLV.ToString();
+        //Stamina
+        var staminaPlayer = player.GetComponent<FirstPersonController>().GetStamina;
+        var staminaPlayerDefault = player.GetComponent<FirstPersonController>().GetStaminaDefault;
+        staminaSystem.fillAmount = staminaPlayer / staminaPlayerDefault;
+        if (staminaPlayer < 5) staminaSystem.transform.gameObject.SetActive(true);
+        else staminaSystem.transform.gameObject.SetActive(false);
     }
 
 

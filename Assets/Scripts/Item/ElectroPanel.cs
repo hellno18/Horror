@@ -12,6 +12,7 @@ public class ElectroPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // turn on the electro panel and then door can be open
         isDoorOn = false;
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
@@ -36,7 +37,7 @@ public class ElectroPanel : MonoBehaviour
     ==============================*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isDoorOn)
         {
             isInteract = true;
             StartCoroutine(CButtonCoroutine());
@@ -48,7 +49,7 @@ public class ElectroPanel : MonoBehaviour
     ==============================*/
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !isDoorOn)
         {
             isInteract = false;
         }
