@@ -43,7 +43,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         private float stamina;
-      
+        private float recovery = 2f;
+
+        private bool isRecovery;
         private bool isPressed;
 
         // Use this for initialization
@@ -60,6 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
             isPressed = false;
+            isRecovery = false;
             stamina = defaultStamina;
         }
 
@@ -102,8 +105,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             float speed;
             GetInput(out speed);
-            if (Input.GetKeyDown(KeyCode.LeftShift))  isPressed = true;
-            if (Input.GetKeyUp(KeyCode.LeftShift)) isPressed = false;
+            if (Input.GetButtonDown("Run"))  isPressed = true;
+            if (Input.GetButtonUp("Run")) isPressed = false;
+            if (isRecovery)
+            {
+                recovery -= Time.deltaTime;
+                speed = 0;
+                print(recovery);
+                if (recovery < 0)
+                {
+                    recovery = 0;
+                    isRecovery = false;
+                }
+            }
+            else
+            {
+                recovery = 2f;
+            }
             if (isPressed)
             {
                 stamina -= Time.deltaTime;
@@ -111,12 +129,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     stamina = 0;
                     speed = 0;
+                    isRecovery = true;
                 }
                 //print(stamina);
             }
             if (!isPressed)
             {
-                stamina += Time.deltaTime;
+                if(!isRecovery) stamina += Time.deltaTime;
                 if (stamina > defaultStamina)
                 {
                     stamina = defaultStamina;
@@ -159,7 +178,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MouseLook.UpdateCursorLock();
         }
-
 
         private void PlayJumpSound()
         {
@@ -239,7 +257,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            m_IsWalking = !Input.GetButton("Run");
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
@@ -283,6 +301,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
 
+      
         //Getter stamina
         public float GetStamina
         {
