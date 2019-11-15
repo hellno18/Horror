@@ -4058,6 +4058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 351035666}
   - component: {fileID: 351035669}
+  - component: {fileID: 351035668}
   m_Layer: 0
   m_Name: DoorNormal (6)
   m_TagString: Door
@@ -4080,6 +4081,20 @@ Transform:
   m_Father: {fileID: 1340778651}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 168.3, y: 90, z: 89.99999}
+--- !u!114 &351035668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351035665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee3f50804335804f9f1f7a579968468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorOpenAngle: -260
+  islocked: 1
 --- !u!65 &351035669
 BoxCollider:
   m_ObjectHideFlags: 0
