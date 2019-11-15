@@ -131,7 +131,7 @@ public class EnemySlenderNormal : EnemyBase
      ======================*/
     private void GotoNextPoint()
     {
-        float x = Random.Range(0, 30);
+        float x = Random.Range(0, 45);
         float z = Random.Range(0, -30);
         randomSpotPoint = new Vector3(x, transform.position.y, z);
 
