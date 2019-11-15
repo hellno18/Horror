@@ -36,7 +36,7 @@ public class DoorGenerator : MonoBehaviour
         transform.localEulerAngles = new Vector3(Mathf.LerpAngle(currentRotationAngle, defaultRotationAngle +
             (isOpen ? doorOpenAngle : 0), openTime),transform.localEulerAngles.y 
             , transform.localEulerAngles.z);
-        if (electro.GetElectroPanel)
+        if (electro.GetIsDoor)
         {
             //electro true
             if (Input.GetButtonDown("Interact") && isInteract)
@@ -56,7 +56,7 @@ public class DoorGenerator : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = true;
-            if (!electro.GetElectroPanel)
+            if (!electro.GetIsDoor)
             {
                 //Show hud "broken"
                 print("Broken");
@@ -77,7 +77,7 @@ public class DoorGenerator : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = false;
-            if (!electro.GetElectroPanel)
+            if (!electro.GetIsDoor)
             {
                 //Show hud "broken"
             }

@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class ElectroPanel : MonoBehaviour
 {
+    public enum DoorType
+    {
+        generator,
+        elevator
+    }
+    [SerializeField] DoorType doorType;
     bool isDoorOn;
+    bool isElevatorOn;
     bool isInteract;
     HUD hud;
     AudioManager audioManager;
@@ -12,8 +19,18 @@ public class ElectroPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // turn on the electro panel and then door can be open
-        isDoorOn = false;
+        //reference to door type
+        switch (doorType)
+        {
+            case DoorType.elevator:
+                // turn on the electro panel and then elevator can be open
+                isElevatorOn = false;
+                break;
+            case DoorType.generator:
+                // turn on the electro panel and then door can be open
+                isDoorOn = false;
+                break;
+        }
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
@@ -25,7 +42,16 @@ public class ElectroPanel : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                isDoorOn = true;
+                switch (doorType)
+                {
+                    case DoorType.elevator:
+                        isElevatorOn = true;
+                        break;
+                    case DoorType.generator:
+                        // turn on the electro panel and then door can be open
+                        isDoorOn = true;
+                        break;
+                }
                 audioManager.PlaySE("EMotorDoor");
             }
         }
@@ -62,7 +88,21 @@ public class ElectroPanel : MonoBehaviour
         hud.CButtonDisplay();
     }
 
-    public bool GetElectroPanel
+    /*===========================
+     Getter Elevator
+     ===========================*/
+     public bool GetIsElevator
+    {
+        get
+        {
+            return isElevatorOn;
+        }
+    }
+
+    /*===========================
+     Getter Door
+     ===========================*/
+    public bool GetIsDoor
     {
         get
         {
