@@ -8,7 +8,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
     private float timer = 5;
     private float currTimer;
     FlashLight flashlight;
-
+    HUD hud;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +17,15 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         //set default stress LV
         stressLV = 80;
         flashlight = this.GetComponentInChildren<FlashLight>();
+        hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
     }
 
     protected override void Run()
     {
+        if (Input.GetButtonDown("Quest"))
+        {
+            hud.QuestDisplay();
+        }
         if (flashlight.GetIsLight)
         {
             currTimer -= Time.deltaTime;

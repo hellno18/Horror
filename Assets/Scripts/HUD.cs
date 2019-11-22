@@ -7,11 +7,17 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class HUD : MonoBehaviour
 {
+    //Toggle Quest
+    public Toggle Toggle1 { get; set; }
+    public Toggle Toggle2 { get; set; }
+    public Toggle Toggle3 { get; set; }
+
     private Transform gButton;
     private Transform cButton;
     private Image staminaSystem;
     private bool is_gButton;
     private bool is_cButton;
+    private bool is_questButton;
     private GameObject player;
     private FlashLight flashlight;
     private PlayerController playerController;
@@ -19,6 +25,8 @@ public class HUD : MonoBehaviour
     private Slider healthSystem;
     private TextMeshProUGUI stressLVText;
     private Transform tutorialFlashlight;
+    private Transform questObjective;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,6 +36,7 @@ public class HUD : MonoBehaviour
         cButton = this.transform.Find("InteractButton[C]");
         is_gButton = false;
         is_cButton = false;
+        is_questButton = false;
         //Find player
         player = GameObject.FindGameObjectWithTag("Player");
         //get component health
@@ -44,9 +53,16 @@ public class HUD : MonoBehaviour
             .FindGameObjectWithTag("StressLV")
             .GetComponent<TextMeshProUGUI>();
         //get component stamina
-        staminaSystem = transform.Find("Stamina System").GetComponent<Image>();
+        staminaSystem = this.transform.Find("Stamina System").GetComponent<Image>();
         //get component tutorial Flashlight
-        tutorialFlashlight = transform.Find("TutorialFlashLight").GetComponent<Transform>();
+        tutorialFlashlight = this.transform.Find("TutorialFlashLight").GetComponent<Transform>();
+        //get component  quest objective
+        questObjective = this.transform.Find("QuestObjective").GetComponent<Transform>();
+
+        //Toggle
+        Toggle1 = this.transform.Find("QuestObjective/Toggle1").GetComponent<Toggle>();
+        Toggle2 = this.transform.Find("QuestObjective/Toggle2").GetComponent<Toggle>();
+        Toggle3 = this.transform.Find("QuestObjective/Toggle3").GetComponent<Toggle>();
 
     }
 
@@ -90,7 +106,9 @@ public class HUD : MonoBehaviour
             gButton.gameObject.SetActive(false);
         }
     }
-
+    /*=============================
+    * toggle C Button Display
+    ==============================*/
     public void CButtonDisplay()
     {
         is_cButton = !is_cButton;
@@ -101,6 +119,22 @@ public class HUD : MonoBehaviour
         else
         {
             cButton.gameObject.SetActive(false);
+        }
+    }
+
+    /*=============================
+    * toggle Quest Objective Button Display
+    ==============================*/
+    public void QuestDisplay()
+    {
+        is_questButton = !is_questButton;
+        if (is_questButton)
+        {
+            questObjective.gameObject.SetActive(true);
+        }
+        else
+        {
+            questObjective.gameObject.SetActive(false);
         }
     }
 }

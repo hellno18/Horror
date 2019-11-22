@@ -1154,7 +1154,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971239766532414}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.1
   m_Height: 0.79131097
@@ -1218,6 +1218,10 @@ MonoBehaviour:
   seeSight: 6
   distance: 2.8
   far: 1.8
+  xMin: 0
+  xMax: 45
+  zMin: 0
+  zMax: -30
   points: []
 --- !u!54 &3100029939273485720
 Rigidbody:

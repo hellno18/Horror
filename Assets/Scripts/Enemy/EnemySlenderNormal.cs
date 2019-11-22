@@ -15,13 +15,16 @@ public class EnemySlenderNormal : EnemyBase
     [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private float seeSight = 8f;
     [SerializeField] private float distance;
-    [SerializeField] private float far = 1.5f;
+    [SerializeField] private float far = 0.5f;
+    [SerializeField] private float xMin = 0f;
+    [SerializeField] private float xMax=45f;
+    [SerializeField] private float zMin = 0f;
+    [SerializeField] private float zMax = -30f;
     [SerializeField] private Transform[] points;
     Transform player;
     private float timeDis=0;
     private int destPoint = 0;
     FlashLight flashlight;
-    bool changeRoute;
     bool isDamage;
 
     private Vector3 randomSpotPoint;
@@ -36,11 +39,20 @@ public class EnemySlenderNormal : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
-        //changeRoute bool
-        changeRoute = false;
+
         navMesh.speed=2.5f;
 
-        GotoNextPoint();
+        switch (enemyType)
+        {
+            case EnemyType.normal:
+                //default go to next point
+                GotoNextPoint();
+                break;
+            case EnemyType.patrol:
+                GoToPatrol();
+                break;
+        }
+       
     }
 
     protected override void Run()
@@ -55,7 +67,8 @@ public class EnemySlenderNormal : EnemyBase
         }
         //calculate distance with player and enemy
         distance = Vector3.Distance(player.position, this.transform.position);
-        //print(distance);
+
+        // when distance smaller rather than seesight, enemy chase player
         if (distance < seeSight)
         {
             if (flashlight.GetIsLight)
@@ -92,32 +105,39 @@ public class EnemySlenderNormal : EnemyBase
         {
             enemyState= EnemyState.walk;
         }
-        switch (enemyState)
+        if (enemyType == EnemyType.normal)
         {
-            case EnemyState.chase:
-                //chase animation
-                animator.SetBool("Chase", true);
-                break;
-            case EnemyState.attack:
-                animator.SetBool("Chase", false);
-                animator.SetTrigger("Attack");
-                attackSpeed -= Time.deltaTime;
-                /*
-                attackSpeed -= Time.deltaTime;
-                
-                */
-                break;
-            case EnemyState.walk:
-                animator.SetBool("Chase", false);
-                if (enemyType == EnemyType.normal)
+            switch (enemyState)
+            {
+                case EnemyState.chase:
+                    //chase animation
+                    animator.SetBool("Chase", true);
+                    break;
+                case EnemyState.attack:
+                    animator.SetBool("Chase", false);
+                    animator.SetTrigger("Attack");
+                    attackSpeed -= Time.deltaTime;
+                    // attackSpeed -= Time.deltaTime;
+                    break;
+                case EnemyState.walk:
                     if (navMesh.remainingDistance < 0.5f)
+                    {
+                        animator.SetBool("Chase", false);
                         GotoNextPoint();
-                else if(enemyType == EnemyType.patrol)
-                {
-                   GoToPatrol();
-                }
-                break;
+                    }
+                    break;
+            }
         }
+        if(enemyType == EnemyType.patrol)
+        {
+            if (navMesh.remainingDistance < 0.5f)
+            {
+                animator.SetBool("Chase", false);
+                //idle and find another to patrol
+                GoToPatrol();
+            }
+        }
+        
     }
 
     private void DamageToPlayer()
@@ -131,8 +151,8 @@ public class EnemySlenderNormal : EnemyBase
      ======================*/
     private void GotoNextPoint()
     {
-        float x = Random.Range(0, 45);
-        float z = Random.Range(0, -30);
+        float x = Random.Range(xMin, xMax);
+        float z = Random.Range(zMin, zMax);
         randomSpotPoint = new Vector3(x, transform.position.y, z);
 
         // Set the agent to go to the currently selected destination.

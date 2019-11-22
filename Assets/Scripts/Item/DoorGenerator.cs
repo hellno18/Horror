@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DoorGenerator : MonoBehaviour
 {
+    public bool IsClear { get; set; }
     ElectroPanel electro;
     HUD hud;
     bool isInteract;
     bool isOpen;
+
     // Smoothly open a door
     [SerializeField] private float doorOpenAngle = 90.0f; //Set either positive or negative number to open the door inwards or outwards
     private float openSpeed = 2.0f; //Increasing this value will make the door open faster
@@ -22,6 +24,7 @@ public class DoorGenerator : MonoBehaviour
             .GetComponent<ElectroPanel>();
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
+        IsClear = false;
         defaultRotationAngle = transform.localEulerAngles.x;
         currentRotationAngle = transform.localEulerAngles.x;
     }
@@ -41,6 +44,7 @@ public class DoorGenerator : MonoBehaviour
             //electro true
             if (Input.GetButtonDown("Interact") && isInteract)
             {
+                IsClear = true;
                 isOpen = !isOpen;
                 currentRotationAngle = transform.localEulerAngles.x;
                 openTime = 0;
