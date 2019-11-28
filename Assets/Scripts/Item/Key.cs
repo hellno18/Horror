@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+    //Normal key, special for ending game
+    enum KeyType
+    {
+        normal,
+        special
+    }
+
+    [SerializeField] private KeyType keyType = KeyType.normal;
+
     HUD hud;
     Examines examines;
     //PlayerController player;
@@ -12,8 +21,6 @@ public class Key : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        //get component player controller
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         //get component examine
@@ -33,7 +40,19 @@ public class Key : MonoBehaviour
                 examines.SetExamineMode(false);
             }
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();
-            player.AddKeyCount();
+            switch (keyType)
+            {
+                case KeyType.normal:
+                    //Add key normal
+                    player.AddKeyNCount();
+                    break;
+                case KeyType.special:
+                    //Now player can exit from the game
+                    player.SetKeyExit(true);
+                    break;
+            }
+            
+            
            //display hud
             hud.GButtonDisplay();
             //destroy

@@ -17,8 +17,11 @@ public interface IPuzzle
 //Key Count
 public interface IKey
 {
-    int GetKeyCount();
-    int AddKeyCount();
-    int RemoveKeyCount();
+    int GetKeyNCount();
+    int AddKeyNCount();
+    int RemoveKeyNCount();
+    bool GetKeyExit();
+    void SetKeyExit(bool value);
+
 }
 

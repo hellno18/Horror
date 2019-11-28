@@ -40,11 +40,11 @@ public class DoorNormal : MonoBehaviour
             currentRotationAngle = transform.localEulerAngles.x;
             openTime = 0;
         }
-        if(Input.GetButtonDown("Unlock")&&islocked &&isInteract&& player.GetKeyCount()>0)
+        if(Input.GetButtonDown("Unlock")&&islocked &&isInteract&& player.GetKeyNCount()>0)
         {
             islocked = false;
             //remove keycount --
-            player.RemoveKeyCount();
+            player.RemoveKeyNCount();
         }
 
 

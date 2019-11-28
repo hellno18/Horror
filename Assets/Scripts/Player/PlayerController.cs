@@ -131,18 +131,32 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
     /*======================
     *Setter Getter keyCount
     ======================*/
-    public int GetKeyCount()
+    public int GetKeyNCount()
     {
-        return keyCount;
+        return keyNCount;
     }
-    public int AddKeyCount()
+    public int AddKeyNCount()
     {
-        return keyCount++;
+        return keyNCount++;
     }
-    public int RemoveKeyCount()
+    public int RemoveKeyNCount()
     {
-        return keyCount--;
+        return keyNCount--;
     }
+
+    /*++++++++++++
+     * KEY EXIT
+     +++++++++++++*/
+    public bool GetKeyExit()
+    {
+      return keyExit;        
+    }
+    
+    public void SetKeyExit(bool value)
+    {
+        keyExit = true;
+    }
+
     /*======================
     *Setter Getter Puzzle
     ======================*/
