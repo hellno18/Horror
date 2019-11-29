@@ -32,9 +32,6 @@ public class Key : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var questKey = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        if (questKey.GetCountPuzzle() >=2) this.gameObject.SetActive(true);
-
         if (Input.GetButton("Grab")&& isInteract)
         {
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();

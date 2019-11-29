@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
+    GameObject keyExit;
     DoorGenerator electro;
     HUD hud;
     // Start is called before the first frame update
@@ -14,12 +15,15 @@ public class Quest : MonoBehaviour
         //get component electropanel
         electro = GameObject.Find("DoorGenerator")
             .GetComponent<DoorGenerator>();
+        keyExit = GameObject.Find("key_gold");
+        keyExit.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
         if (electro.IsClear)
         {
             hud.Toggle1.isOn = true;
@@ -27,6 +31,15 @@ public class Quest : MonoBehaviour
         if (player.GetCountPuzzle() >= 2)
         {
             hud.Toggle2.isOn = true;
+            if (keyExit != null)
+            {
+                keyExit.SetActive(true);
+            }
+            
+        }
+        if (player.GetKeyExit())
+        {
+            hud.Toggle3.isOn = true;
         }
         //if ()
         //{
