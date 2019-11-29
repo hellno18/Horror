@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
 public class Result : MonoBehaviour
 {
     Transform gameOverText;
     Transform winText;
     Image bg;
+   
+
     // Start is called before the first frame update
     void Start()
     {
         gameOverText = this.transform.Find("GameOverText");
         winText = this.transform.Find("WinText");
         bg = this.transform.GetComponent<Image>();
+
     }
 
     // Update is called once per frame
