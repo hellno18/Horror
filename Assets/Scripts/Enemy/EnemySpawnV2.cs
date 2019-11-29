@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnemySpawnV2 : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;                // The enemy prefab to be spawned.
+    private float intervalTime = 10f;            // How long between each spawn.
+    private float startTime = 2f;
     private PlayerController playerHealth;       // Reference to the player's heatlh.
     private Transform player;            // The position that that camera will be following.
     private FlashLight flashlight;       //reference to the player flashlight
-    private float spawnTime = 5f;            // How long between each spawn.
-    private float spawnDistance = 13f;    //reference betweem the player and enemy
+    private float spawnDistance = 13f;    //reference between the player and enemy
 
     private void Start()
     {
@@ -27,18 +28,19 @@ public class EnemySpawnV2 : MonoBehaviour
         }
 
         // Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
-        InvokeRepeating("Spawn", Time.time, spawnTime);
+        InvokeRepeating("Spawn", startTime, intervalTime);
 
     }
 
     private void Spawn()
     {
         // If the player has no health left...
-        if (playerHealth.GetHealth <= 0f)
+        if (playerHealth.GetHealth <= 0f )
         {
             // ... exit the function.
             return;
         }
+
 
         // collect the children that are close.
         List<Transform> near = new List<Transform>();

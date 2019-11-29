@@ -18,6 +18,7 @@ public class HUD : MonoBehaviour
     private bool is_gButton;
     private bool is_cButton;
     private bool is_questButton;
+    private bool isOnTutorial;
     private GameObject player;
     private FlashLight flashlight;
     private PlayerController playerController;
@@ -83,12 +84,18 @@ public class HUD : MonoBehaviour
     /*============================
      * Tutorial flashlight
      ============================*/
-    public IEnumerator TutorialFLCoroutine()
+    public void TutorialFLCoroutine()
     {
-        tutorialFlashlight.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        tutorialFlashlight.gameObject.SetActive(false);
-        yield break;
+        isOnTutorial = !isOnTutorial;
+        if (isOnTutorial)
+        {
+            tutorialFlashlight.gameObject.SetActive(true);
+        }
+        else
+        {
+            tutorialFlashlight.gameObject.SetActive(false);
+        }
+       
     }
 
     /*=============================

@@ -11,7 +11,14 @@ public class Trolley : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(hud.TutorialFLCoroutine());
-        
+        //show the tutorial HUD
+        hud.TutorialFLCoroutine();
+       
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        //Hide
+        hud.TutorialFLCoroutine();
+        Destroy(this.gameObject);
     }
 }
