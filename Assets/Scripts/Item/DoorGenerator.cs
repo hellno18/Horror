@@ -68,7 +68,7 @@ public class DoorGenerator : MonoBehaviour
             else
             {
                 //show hud press interact
-                StartCoroutine(CButtonCoroutine());
+                StartCoroutine(hud.CButtonCoroutine());
             }
         }
     }
@@ -88,10 +88,5 @@ public class DoorGenerator : MonoBehaviour
         }
     }
 
-    IEnumerator CButtonCoroutine()
-    {
-        hud.CButtonDisplay();
-        yield return new WaitForSeconds(1f);
-        hud.CButtonDisplay();
-    }
+
 }

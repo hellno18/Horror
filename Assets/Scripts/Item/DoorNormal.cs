@@ -6,6 +6,7 @@ public class DoorNormal : MonoBehaviour
 {
     bool isInteract;
     bool isOpen;
+    HUD hud;
     // Smoothly open a door
     [SerializeField] private float doorOpenAngle=-80f; //Set either positive or negative number to open the door inwards or outwards
     [SerializeField] private bool islocked;
@@ -18,7 +19,9 @@ public class DoorNormal : MonoBehaviour
     void Start()
     {
         defaultRotationAngle = transform.localEulerAngles.x;
-        currentRotationAngle = transform.localEulerAngles.x;        
+        currentRotationAngle = transform.localEulerAngles.x;
+        //get component HUD
+        hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
     }
 
     // Update is called once per frame
@@ -59,6 +62,7 @@ public class DoorNormal : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isInteract = true;
+            StartCoroutine(hud.CButtonCoroutine());
         }
     }
 

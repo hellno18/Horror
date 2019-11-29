@@ -13,6 +13,7 @@ TagManager:
   - Puzzle
   - Door
   - WallPuzzle
+  - Result
   layers:
   - Default
   - TransparentFX

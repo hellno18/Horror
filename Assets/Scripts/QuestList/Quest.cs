@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
+    public bool IsQuestDone { get; set; }
     GameObject keyExit;
     DoorGenerator electro;
     HUD hud;
@@ -17,17 +18,23 @@ public class Quest : MonoBehaviour
             .GetComponent<DoorGenerator>();
         keyExit = GameObject.Find("key_gold");
         keyExit.SetActive(false);
+        IsQuestDone = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        if (hud.Toggle1.isOn&& hud.Toggle2.isOn&& hud.Toggle3.isOn)
+        {
+            IsQuestDone = true;
+        }
 
         if (electro.IsClear)
         {
             hud.Toggle1.isOn = true;
         }
+
         if (player.GetCountPuzzle() >= 2)
         {
             hud.Toggle2.isOn = true;
@@ -35,15 +42,13 @@ public class Quest : MonoBehaviour
             {
                 keyExit.SetActive(true);
             }
-            
         }
+
         if (player.GetKeyExit())
         {
             hud.Toggle3.isOn = true;
         }
-        //if ()
-        //{
-        //    hud.Toggle3.isOn = true;
-        //}
+
+        
     }
 }

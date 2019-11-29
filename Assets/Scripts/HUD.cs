@@ -81,6 +81,13 @@ public class HUD : MonoBehaviour
         else staminaSystem.transform.gameObject.SetActive(false);
     }
 
+    public IEnumerator CButtonCoroutine()
+    {
+        CButtonDisplay();
+        yield return new WaitForSeconds(1f);
+        CButtonDisplay();
+    }
+
     /*============================
      * Tutorial flashlight
      ============================*/

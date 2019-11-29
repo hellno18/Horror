@@ -104,6 +104,8 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         }
     }
 
+
+
     //For camera shake
     private void CameraShake()
     {
@@ -118,7 +120,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         }
     }
 
-    private IEnumerator ResultCoroutine()
+    public IEnumerator ResultCoroutine()
     {
         //Dead Show Slenderman face
         //TODO
