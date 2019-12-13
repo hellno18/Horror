@@ -63,12 +63,11 @@ public class DoorGenerator : MonoBehaviour
         {
             timer -= Time.deltaTime;
             if (timer < 0) timer = 0;
-            if (Input.GetButtonDown("Interact") && isInteract&&timer==0)
+            if (Input.GetButtonDown("Interact") && isInteract && timer==0)
             {
                 timer = 2;
                 audioManager.PlaySE("door_knob");
             }
-            print(timer);
         }
     }
 

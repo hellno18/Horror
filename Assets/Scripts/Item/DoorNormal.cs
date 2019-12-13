@@ -14,6 +14,7 @@ public class DoorNormal : MonoBehaviour
     private float defaultRotationAngle;
     private float currentRotationAngle;
     private float openTime = 0;
+    private float timer = 2;
     //Global Variable
     HUD hud;
     AudioManager audioManager;
@@ -33,6 +34,9 @@ public class DoorNormal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //reference to timer
+        timer -= Time.deltaTime;
+        if (timer < 0) timer = 0;
         // reference to player controller component
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();
         if (openTime < 1)
@@ -51,11 +55,21 @@ public class DoorNormal : MonoBehaviour
             currentRotationAngle = transform.localEulerAngles.x;
             openTime = 0;
         }
-        if(Input.GetButtonDown("Unlock")&&islocked &&isInteract&& player.GetKeyNCount()>0)
+
+        if (Input.GetButtonDown("Interact") &&islocked && isInteract
+            && player.GetKeyNCount()>0 && timer==0)
         {
             islocked = false;
             //remove keycount --
             player.RemoveKeyNCount();
+            audioManager.PlaySE("padlock");
+        }
+
+        if (Input.GetButtonDown("Interact") && islocked 
+            && isInteract && player.GetKeyNCount()>=0 && timer==0)
+        {
+            timer = 2;
+            audioManager.PlaySE("door_knob");
         }
 
 

@@ -84,6 +84,8 @@ public class FlashLight : PlayerBase
                 batLevel = 0;
                 hand.gameObject.SetActive(false);
                 isLight = false;
+                //Play turn off torch
+                //audioManager.PlaySE("torch");
             }
             else
             {
