@@ -42,6 +42,8 @@ public class ElectroPanel : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
+                //Play SE
+                audioManager.PlaySE("EMotorDoor");
                 switch (doorType)
                 {
                     case DoorType.elevator:
@@ -50,9 +52,9 @@ public class ElectroPanel : MonoBehaviour
                     case DoorType.generator:
                         // turn on the electro panel and then door can be open
                         isDoorOn = true;
+                        isInteract = false;
                         break;
                 }
-                audioManager.PlaySE("EMotorDoor");
             }
         }
        
@@ -66,7 +68,7 @@ public class ElectroPanel : MonoBehaviour
         if (other.gameObject.tag == "Player" && !isDoorOn)
         {
             isInteract = true;
-            StartCoroutine(CButtonCoroutine());
+            StartCoroutine(hud.CButtonCoroutine());
         }
     }
 
@@ -79,13 +81,6 @@ public class ElectroPanel : MonoBehaviour
         {
             isInteract = false;
         }
-    }
-
-    IEnumerator CButtonCoroutine()
-    {
-        hud.CButtonDisplay();
-        yield return new WaitForSeconds(1f);
-        hud.CButtonDisplay();
     }
 
     /*===========================

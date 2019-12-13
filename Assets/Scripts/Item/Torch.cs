@@ -7,6 +7,7 @@ public class Torch : MonoBehaviour
     FlashLight flashlight;
     HUD hud;
     Examines examines;
+    AudioManager audioManager;
     bool isInteract;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,9 @@ public class Torch : MonoBehaviour
         //get component examine
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
+        //get component audiomanager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+            .GetComponent<AudioManager>();
         isInteract = false;
     }
 
@@ -33,7 +37,8 @@ public class Torch : MonoBehaviour
                 examines.UnPause();
                 examines.SetExamineMode(false);
             }
-
+            //play se
+            audioManager.PlaySE("pickitem");
             //set count battery
             flashlight.SetIsBringTorch = true;
             //display hud

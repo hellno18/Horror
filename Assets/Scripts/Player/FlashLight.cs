@@ -10,13 +10,16 @@ public class FlashLight : PlayerBase
     private int batCount=0;              // The amount of battery count.
     private float distance = 15f;  //The distance in float between player and enemy.
     private float damage=0.5f;      //damage flashlight.
+
+    private float timer=5;              // Timer
+    private float currTimer;            //current timer
+
+    //Global Variable
     private Transform hand;         // Reference to hand component.
     private Camera mainCamera;      // Reference to camera component.
     private Examines examines;               // Reference to examines component.
     private Light pointLight;                // Reference to light component.
-
-    private float timer=5;              // Timer
-    private float currTimer;            //current timer
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +35,9 @@ public class FlashLight : PlayerBase
         //get component examines
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
-        pointLight = GameObject.Find("PointLight")
-    .GetComponent<Light>();
+        pointLight = GameObject.Find("PointLight").GetComponent<Light>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+            .GetComponent<AudioManager>();
     }
 
     //OverLoading flashlight
@@ -99,6 +103,8 @@ public class FlashLight : PlayerBase
         if (Input.GetButtonUp("Flashlight") &&
             !examines.GetExamineMode  && isBringTorch)
         {
+            //Play se
+            audioManager.PlaySE("torch");
             if (!isLight&&batLevel>0)
             {
                 isLight = true;

@@ -5,8 +5,6 @@ using UnityEngine;
 public class DoorGenerator : MonoBehaviour
 {
     public bool IsClear { get; set; }
-    ElectroPanel electro;
-    HUD hud;
     bool isInteract;
     bool isOpen;
 
@@ -16,6 +14,10 @@ public class DoorGenerator : MonoBehaviour
     private float defaultRotationAngle;
     private float currentRotationAngle;
     private float openTime = 0;
+    //Global Variable 
+    ElectroPanel electro;
+    AudioManager audioManager;
+    HUD hud;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,9 @@ public class DoorGenerator : MonoBehaviour
             .GetComponent<ElectroPanel>();
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
+        //get component audiomanager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+            .GetComponent<AudioManager>();
         IsClear = false;
         defaultRotationAngle = transform.localEulerAngles.x;
         currentRotationAngle = transform.localEulerAngles.x;
@@ -46,8 +51,21 @@ public class DoorGenerator : MonoBehaviour
             {
                 IsClear = true;
                 isOpen = !isOpen;
+                if (isOpen) audioManager.PlaySE("open_creaky_door");
+                else audioManager.PlaySE("door_creak_closing");
                 currentRotationAngle = transform.localEulerAngles.x;
                 openTime = 0;
+
+            }
+        }
+        else
+        {
+            //float timer = 5;
+            //timer -= Time.deltaTime;
+            //print(timer);
+            if (Input.GetButtonDown("Interact") && isInteract && timer>4)
+            {
+                audioManager.PlaySE("door_knob");
             }
         }
     }

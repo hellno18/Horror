@@ -6,7 +6,7 @@ public class DoorNormal : MonoBehaviour
 {
     bool isInteract;
     bool isOpen;
-    HUD hud;
+
     // Smoothly open a door
     [SerializeField] private float doorOpenAngle=-80f; //Set either positive or negative number to open the door inwards or outwards
     [SerializeField] private bool islocked;
@@ -14,6 +14,9 @@ public class DoorNormal : MonoBehaviour
     private float defaultRotationAngle;
     private float currentRotationAngle;
     private float openTime = 0;
+    //Global Variable
+    HUD hud;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,9 @@ public class DoorNormal : MonoBehaviour
         currentRotationAngle = transform.localEulerAngles.x;
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
+        //get component audiomanager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+            .GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -40,6 +46,8 @@ public class DoorNormal : MonoBehaviour
         if (Input.GetButtonDown("Interact") && isInteract &&!islocked)
         {
             isOpen = !isOpen;
+            if (isOpen) audioManager.PlaySE("open_creaky_door");
+            else audioManager.PlaySE("door_creak_closing");
             currentRotationAngle = transform.localEulerAngles.x;
             openTime = 0;
         }
