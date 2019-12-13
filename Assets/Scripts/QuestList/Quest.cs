@@ -8,6 +8,10 @@ public class Quest : MonoBehaviour
     GameObject keyExit;
     DoorGenerator electro;
     HUD hud;
+
+    //AudioManager
+    AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,9 @@ public class Quest : MonoBehaviour
         keyExit = GameObject.Find("key_gold");
         keyExit.SetActive(false);
         IsQuestDone = false;
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+          .GetComponent<AudioManager>();
+        audioManager.PlayBGM("The_Unsolved_Murder_-_David_Fesliyan");
     }
 
     // Update is called once per frame
