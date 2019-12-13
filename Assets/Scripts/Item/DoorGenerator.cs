@@ -14,6 +14,7 @@ public class DoorGenerator : MonoBehaviour
     private float defaultRotationAngle;
     private float currentRotationAngle;
     private float openTime = 0;
+    private float timer = 2;
     //Global Variable 
     ElectroPanel electro;
     AudioManager audioManager;
@@ -60,13 +61,14 @@ public class DoorGenerator : MonoBehaviour
         }
         else
         {
-            //float timer = 5;
-            //timer -= Time.deltaTime;
-            //print(timer);
-            if (Input.GetButtonDown("Interact") && isInteract && timer>4)
+            timer -= Time.deltaTime;
+            if (timer < 0) timer = 0;
+            if (Input.GetButtonDown("Interact") && isInteract&&timer==0)
             {
+                timer = 2;
                 audioManager.PlaySE("door_knob");
             }
+            print(timer);
         }
     }
 
