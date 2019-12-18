@@ -23,9 +23,9 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     //Whether audio is fading out
     private bool _isFadeOut = false;
-
+   
     //BGM and SE get component from audio source
-    [SerializeField] private AudioSource AttachBGMSource, AttachSESource;
+    [SerializeField] public AudioSource AttachBGMSource, AttachSESource;
 
     //Using dictionary for database BGM and SE
     private Dictionary<string, AudioClip> _bgmDic, _seDic;
@@ -161,5 +161,13 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
         PlayerPrefs.SetFloat(BGM_Volume_Key, BGMVolume);
         PlayerPrefs.SetFloat(SE_Volume_Key, SEVolume);
+    }
+
+    public AudioSource GetAttachSESource
+    {
+        get
+        {
+            return GetAttachSESource;
+        }
     }
 }

@@ -21,6 +21,7 @@ public class PlayerBase : MonoBehaviour
     protected HUD hud;
     protected Camera mainCamera;
     protected FirstPersonController controller;
+    protected AudioManager audioManager;
 
     private void OnEnable()
     {
@@ -32,6 +33,8 @@ public class PlayerBase : MonoBehaviour
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         mainCamera = this.GetComponentInChildren<Camera>();
         controller = this.GetComponent<FirstPersonController>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+  .GetComponent<AudioManager>();
 
 
         //Playerprefs Result Win / Lose

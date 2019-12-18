@@ -62,6 +62,9 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                     StressLV += 1;
                     //timer default 5 seconds
                     currTimer = timer;
+                    if(!audioManager.AttachSESource.isPlaying)
+                        audioManager.PlaySE("heartbeat-01a");
+
                 }
             }
             else if (StressLV >= 90 && StressLV < 120)
@@ -71,6 +74,10 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                     StressLV += 1;
                     health -= 1;
                     currTimer = 3;
+                    if (!audioManager.AttachSESource.isPlaying)
+                    {
+                        audioManager.PlaySE("heartbeat-02a");
+                    }
                 }
             }
             else if (StressLV >= 120 && StressLV < 140)
@@ -80,6 +87,10 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                     StressLV += 1;
                     health -= 1;
                     currTimer = 1;
+                    if (!audioManager.AttachSESource.isPlaying)
+                    {
+                        audioManager.PlaySE("heartbeat-03");
+                    }
                 }
             }
             else if (StressLV >= 140 && StressLV < 160)
@@ -89,10 +100,18 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                     StressLV += 2;
                     health -= 3;
                     currTimer = 1;
+                    if (!audioManager.AttachSESource.isPlaying)
+                    {
+                        audioManager.PlaySE("heartbeat-04");
+                    }
                 }
             }
             else if(stressLV>=160)
             {
+                if (!audioManager.AttachSESource.isPlaying)
+                {
+                    audioManager.PlaySE("heartbeat-04");
+                }
                 StressLV = 160;
                 health = 0;
                 //shake the camera
