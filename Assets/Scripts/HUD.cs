@@ -27,6 +27,7 @@ public class HUD : MonoBehaviour
     private TextMeshProUGUI stressLVText;
     private Transform tutorialFlashlight;
     private Transform questObjective;
+    private Transform cameraRenderer;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,10 +46,12 @@ public class HUD : MonoBehaviour
         //get component flashlight
         flashlight = player.GetComponentInChildren<FlashLight>();
         //get component slider
-        batterySystem = this.transform.Find("Battery System").GetComponent<Slider>();
+        batterySystem = this.transform.Find("CameraRenderer/BatterySystem").GetComponent<Slider>();
         //get component slider 
         healthSystem = this.transform.Find("Health System/HealthSlider")
             .GetComponent<Slider>();
+        //Camera Renderer
+        cameraRenderer = this.transform.Find("CameraRenderer").GetComponent<Transform>();
         //get component stressLV
         stressLVText = GameObject
             .FindGameObjectWithTag("StressLV")
@@ -70,6 +73,8 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!flashlight.IsBringTorch) cameraRenderer.gameObject.SetActive(false);
+        else cameraRenderer.gameObject.SetActive(true);
         batterySystem.value = flashlight.GetBatLight/100;
         healthSystem.value = playerController.GetHealth / 100;
         stressLVText.text = playerController.StressLV.ToString();

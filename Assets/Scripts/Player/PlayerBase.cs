@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerBase : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerBase : MonoBehaviour
     protected FlashLight flashlight;
     protected HUD hud;
     protected Camera mainCamera;
+    protected FirstPersonController controller;
 
     private void OnEnable()
     {
@@ -29,6 +31,7 @@ public class PlayerBase : MonoBehaviour
         flashlight = this.GetComponentInChildren<FlashLight>();
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         mainCamera = this.GetComponentInChildren<Camera>();
+        controller = this.GetComponent<FirstPersonController>();
 
 
         //Playerprefs Result Win / Lose

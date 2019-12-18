@@ -6,12 +6,12 @@ public class FlashLight : PlayerBase
 {
     private bool isBringTorch;          // Whether player is bring torch
     private bool isLight;               // Whether player is turned on light
-    private float batLevel=50f;          // The amount of battery level.
-    private int batCount=0;              // The amount of battery count.
+    private float batLevel = 50f;          // The amount of battery level.
+    private int batCount = 0;              // The amount of battery count.
     private float distance = 15f;  //The distance in float between player and enemy.
-    private float damage=0.5f;      //damage flashlight.
+    private float damage = 0.5f;      //damage flashlight.
 
-    private float timer=5;              // Timer
+    private float timer = 5;              // Timer
     private float currTimer;            //current timer
 
     //Global Variable
@@ -57,7 +57,7 @@ public class FlashLight : PlayerBase
                 //Give damage to enemy with flashlight (slender patrol)
                 if (hit.collider.tag == "SlenderPatrol")
                 {
-                    EnemySlenderPatrol enemySlenderPatrol = hit.collider.transform.GetComponent<EnemySlenderPatrol>();
+                    EnemySlenderNormal enemySlenderPatrol = hit.collider.transform.GetComponent<EnemySlenderNormal>();
                     var damageTarget = enemySlenderPatrol.GetComponent<IDamage>();
                     if (damageTarget != null)
                         damageTarget.AddDamageEnemy(damage);
@@ -98,16 +98,16 @@ public class FlashLight : PlayerBase
         {
             //pointlight disable
             pointLight.enabled = false;
-           
+
         }
 
         //get input flashlight button
         if (Input.GetButtonUp("Flashlight") &&
-            !examines.GetExamineMode  && isBringTorch)
+            !examines.GetExamineMode && isBringTorch)
         {
             //Play se
             audioManager.PlaySE("torch");
-            if (!isLight&&batLevel>0)
+            if (!isLight && batLevel > 0)
             {
                 isLight = true;
                 hand.gameObject.SetActive(true);
@@ -148,7 +148,7 @@ public class FlashLight : PlayerBase
     {
         set
         {
-            isBringTorch=value;
+            isBringTorch = value;
         }
     }
 
@@ -203,5 +203,12 @@ public class FlashLight : PlayerBase
     public void SetBatCount()
     {
         batCount++;
+    }
+
+    public bool IsBringTorch{
+        get
+        {
+            return isBringTorch;
+        }
     }
 }

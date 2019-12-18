@@ -21,13 +21,15 @@ public class EnemySlenderNormal : EnemyBase
     [SerializeField] private float zMin = 0f;
     [SerializeField] private float zMax = -30f;
     [SerializeField] private Transform[] points;
-    Transform player;
+    private Transform player;
     private float timeDis=0;
     private int destPoint = 0;
-    FlashLight flashlight;
-    bool isDamage;
-
+    private bool isDamage;
     private Vector3 randomSpotPoint;
+
+    //Global Variable
+    FlashLight flashlight;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class EnemySlenderNormal : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+    .GetComponent<AudioManager>();
 
         navMesh.speed=2.5f;
 
@@ -202,6 +206,8 @@ public class EnemySlenderNormal : EnemyBase
                 attackSpeed = 1;
                 //Give Damage to player
                 DamageToPlayer();
+                other.GetComponent<PlayerController>().CameraShake();
+                audioManager.PlaySE("blood_guts_spill");
             }
         }
     }

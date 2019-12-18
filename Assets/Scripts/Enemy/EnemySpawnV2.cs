@@ -11,16 +11,20 @@ public class EnemySpawnV2 : MonoBehaviour
     private Transform player;            // The position that that camera will be following.
     private FlashLight flashlight;       //reference to the player flashlight
     private float spawnDistance = 13f;    //reference between the player and enemy
+    private AudioManager audioManager; //reference to audio manager
 
     private void Start()
     {
         /******************
          * GET COMPONENT 
          ******************/
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<PlayerController>();
+        player = GameObject.FindGameObjectWithTag("Player")
+            .GetComponent<Transform>();
         flashlight = player.GetComponentInChildren<FlashLight>();
-
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+            .GetComponent<AudioManager>();
         //gameobject children set into false
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -40,6 +44,8 @@ public class EnemySpawnV2 : MonoBehaviour
             // ... exit the function.
             return;
         }
+        //20% : no audio, 10% : knife audio , 10% : mystic audio
+        int random = Random.Range(0, 50);
 
 
         // collect the children that are close.
@@ -67,7 +73,20 @@ public class EnemySpawnV2 : MonoBehaviour
                 GameObject instance = (GameObject)Instantiate(enemy, near[spawnPointIndex].position, near[spawnPointIndex].rotation);
                 instance.transform.Rotate(Vector3.up, Random.Range(0f, 360f));
             }
-           
+
+            //knife audio
+            if (random > 0 && random < 10)
+            {
+                audioManager.PlaySE("spooky_knife_horror_foley");
+            }
+            else if (random > 10 && random < 20)
+            {
+                audioManager.PlaySE("rigor_mortis_flesh");
+            }
+            else
+            {
+                //no audio
+            }
         }
     }
 }

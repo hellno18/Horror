@@ -15,7 +15,8 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         health = 100;
         //set default stress LV
         stressLV = 80;
-       
+        //Default cursor locked while enabled
+        controller.m_MouseLook.SetCursorLock(true);
     }
 
     protected override void Run()
@@ -94,8 +95,6 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
             {
                 StressLV = 160;
                 health = 0;
-                //Set isShake become true/
-                isShake = true;
                 //shake the camera
                 CameraShake();
                 //called Dead function
@@ -107,8 +106,10 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
 
     //For camera shake
-    private void CameraShake()
+    public void CameraShake()
     {
+        //Set isShake become true/
+        isShake = true;
         if (isShake)
         {
             for (int i = 0; i < 10; i++)
@@ -118,6 +119,8 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                     0) * 0.8f;
             }
         }
+        //Set isShake become false/
+        isShake = false;
     }
 
     public IEnumerator ResultCoroutine()
@@ -133,6 +136,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
             PlayerPrefs.SetString("Result", "Win");
         }
         yield return new WaitForSeconds(2f);
+        controller.m_MouseLook.SetCursorLock(false);
         SceneManager.LoadScene("Result");
     }
     /*======================
@@ -214,5 +218,6 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
     {
         return puzzleCount++;
     }
+
 
 }
