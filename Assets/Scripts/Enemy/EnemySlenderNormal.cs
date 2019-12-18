@@ -25,6 +25,8 @@ public class EnemySlenderNormal : EnemyBase
     private float timeDis=0;
     private int destPoint = 0;
     private bool isDamage;
+    private bool isInsideLight;
+    private Light enemyLight;
     private Vector3 randomSpotPoint;
 
     //Global Variable
@@ -41,11 +43,16 @@ public class EnemySlenderNormal : EnemyBase
         flashlight = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<FlashLight>();
         //get component slender health bar
         enemyBar = this.GetComponentInChildren<Slider>();
+        enemyLight = this.transform.Find("Root/Base/Back/Back_2/Neck/Point Light").GetComponent<Light>();
+        //get component AudioManager
         audioManager = GameObject.FindGameObjectWithTag("AudioManager")
     .GetComponent<AudioManager>();
 
-        navMesh.speed=2.5f;
+        // default turn off light
+        enemyLight.gameObject.SetActive(false);
 
+        navMesh.speed=2.5f;
+        
         switch (enemyType)
         {
             case EnemyType.normal:
@@ -67,6 +74,8 @@ public class EnemySlenderNormal : EnemyBase
         {
             //Hide EnemyBar
             enemyBar.gameObject.SetActive(false);
+            //light enemy
+            enemyLight.gameObject.SetActive(false);
             StartCoroutine("DissolveEnemyCoroutine");
         }
         //calculate distance with player and enemy
@@ -75,12 +84,14 @@ public class EnemySlenderNormal : EnemyBase
         // when distance smaller rather than seesight, enemy chase player
         if (distance < seeSight)
         {
-            if (flashlight.GetIsLight)
+            if (flashlight.GetIsLight||isInsideLight)
             {
+                this.enemyLight.gameObject.SetActive(false);
                 navMesh.speed = 1;
             }
-            else
+            else if(!flashlight.GetIsLight||!isInsideLight)
             {
+                this.enemyLight.gameObject.SetActive(true);
                 navMesh.speed = 2.5f;
             }
             //CHASE
@@ -210,6 +221,19 @@ public class EnemySlenderNormal : EnemyBase
                 audioManager.PlaySE("blood_guts_spill");
             }
         }
+        if (other.gameObject.CompareTag("Light"))
+        {
+            isInsideLight = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Light"))
+        {
+            isInsideLight = false;
+        }
+       
     }
 
 

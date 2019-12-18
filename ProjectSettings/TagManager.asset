@@ -15,6 +15,7 @@ TagManager:
   - WallPuzzle
   - Result
   - AudioManager
+  - Light
   layers:
   - Default
   - TransparentFX
