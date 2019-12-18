@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
+    bool isInteract;
+    
+    //Global variable
     FlashLight flashlight;
     HUD hud;
     Examines examines;
-    bool isInteract;
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,10 @@ public class Battery : MonoBehaviour
         //get component examine
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
+        //get component  audiomanager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager")
+           .GetComponent<AudioManager>();
+
         isInteract = false;
     }
 
@@ -33,7 +40,8 @@ public class Battery : MonoBehaviour
                 examines.UnPause();
                 examines.SetExamineMode(false);
             }
-            
+            //play se pick up
+            audioManager.PlaySE("pickitem");
             //set count battery
             flashlight.SetBatCount();
             //display hud

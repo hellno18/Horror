@@ -127,11 +127,14 @@ public class FlashLight : PlayerBase
         =====================*/
         if (Input.GetButtonUp("Reload"))
         {
+            //random reload
+            //Battery 30-50%
+            int randomBat = Random.Range(30, 50);
             if (batCount > 0)
             {
                 batCount -= 1;
-                //SetBatLevel to 100;
-                this.SetBatLevel = 100f;
+                //SetBatLevel to 30-50;
+                this.SetBatLevel = randomBat;
             }
             else if (batCount < 0)
             {

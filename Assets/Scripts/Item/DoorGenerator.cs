@@ -82,7 +82,7 @@ public class DoorGenerator : MonoBehaviour
             if (!electro.GetIsDoor)
             {
                 //Show hud "broken"
-                print("Broken");
+                //print("Broken");
             }
             else
             {
