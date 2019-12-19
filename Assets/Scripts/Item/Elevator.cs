@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    
-    ElectroPanel electroPanel;
-    Transform rightDoor;
-    Transform leftDoor;
-    Transform boxElevator;
     bool isInteract;
     bool isOpen;
     bool isReady;
@@ -20,6 +15,14 @@ public class Elevator : MonoBehaviour
     private float defaultRightX;
     private float ptk_Elevator_Y;
     private float ptk_Elevator_Default_Y;
+
+    //global variable
+    ElectroPanel electroPanel;
+    Transform rightDoor;
+    Transform leftDoor;
+    Transform boxElevator;
+    AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,10 @@ public class Elevator : MonoBehaviour
         rightDoor = this.transform.Find("PTK_Elevator/Right").GetComponent<Transform>();
         //reference to box elevator
         boxElevator = this.transform.Find("PTK_Elevator").GetComponent<Transform>();
+        //reference to audiomanager
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").
+            GetComponent<AudioManager>();
+
         isOpen = false;
         currentLeftX = leftDoor.position.z;
         defaultLeftX = leftDoor.position.z;
@@ -75,6 +82,8 @@ public class Elevator : MonoBehaviour
 
     public void Move()
     {
+        if(isOpen) audioManager.PlaySE("elevator_door");
+        else audioManager.PlaySE("close_door_3");
         isOpen = !isOpen;
         openTime = 0;
         currentLeftX = leftDoor.position.z;

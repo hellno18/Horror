@@ -9,9 +9,9 @@ public class PlayerBase : MonoBehaviour
     protected int keyNCount; // reference to key normal
     protected int puzzleCount; // referencet to puzzle count
     protected float health = 100;
-    
-   
 
+
+    protected bool isInsideLight; //reference to isInsideLight??
     protected bool keyExit;  //reference to key exit
     protected bool isShake; //reference to camera shaking
 
@@ -58,5 +58,20 @@ public class PlayerBase : MonoBehaviour
         //Overloading
     }
 
+    protected void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Light"))
+        {
+            isInsideLight = true;
+        }
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Light"))
+        {
+            isInsideLight = false;
+        }
+    }
 
 }

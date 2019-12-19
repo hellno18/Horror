@@ -26,6 +26,8 @@ public class EnemySlenderNormal : EnemyBase
     private int destPoint = 0;
     private bool isDamage;
     private bool isInsideLight;
+    private bool isAroundPlayer;
+    private float currTimer;
     private Light enemyLight;
     private Vector3 randomSpotPoint;
 
@@ -36,7 +38,6 @@ public class EnemySlenderNormal : EnemyBase
     // Start is called before the first frame update
     void Start()
     {
-        enemyHealth = 100;
         //get component player
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         //get component flashlight
@@ -46,13 +47,18 @@ public class EnemySlenderNormal : EnemyBase
         enemyLight = this.transform.Find("Root/Base/Back/Back_2/Neck/Point Light").GetComponent<Light>();
         //get component AudioManager
         audioManager = GameObject.FindGameObjectWithTag("AudioManager")
-    .GetComponent<AudioManager>();
+            .GetComponent<AudioManager>();
 
+
+        //INIT
+        enemyHealth = 100;
+        currTimer = 1f;
         // default turn off light
         enemyLight.gameObject.SetActive(false);
 
-        navMesh.speed=2.5f;
-        
+        navMesh.speed = 2.5f;
+        //=======================================================================
+
         switch (enemyType)
         {
             case EnemyType.normal:
@@ -127,16 +133,19 @@ public class EnemySlenderNormal : EnemyBase
                 case EnemyState.chase:
                     //chase animation
                     animator.SetBool("Chase", true);
+                    //Enemy is around player
+                    isAroundPlayer = true;
                     break;
                 case EnemyState.attack:
                     animator.SetBool("Chase", false);
                     animator.SetTrigger("Attack");
                     attackSpeed -= Time.deltaTime;
-                    // attackSpeed -= Time.deltaTime;
                     break;
                 case EnemyState.walk:
                     if (navMesh.remainingDistance < 0.5f)
                     {
+                        //Enemy is around player
+                        isAroundPlayer = false;
                         animator.SetBool("Chase", false);
                         GotoNextPoint();
                     }
@@ -151,6 +160,23 @@ public class EnemySlenderNormal : EnemyBase
                 //idle and find another to patrol
                 GoToPatrol();
             }
+        }
+
+        // AroundPlayer
+        if (isAroundPlayer)
+        {
+            currTimer -= Time.deltaTime;
+            if (currTimer < 0&& player.GetComponent<PlayerController>().StressLV<140)
+            {
+                player.GetComponent<PlayerController>().StressLV += 1;
+                currTimer = 1f;
+            }
+            else if(currTimer < 0 && player.GetComponent<PlayerController>().StressLV > 140)
+            {
+                player.GetComponent<PlayerController>().StressLV += 1;
+                currTimer = 0.5f;
+            }
+           
         }
         
     }
@@ -244,5 +270,4 @@ public class EnemySlenderNormal : EnemyBase
     {
         enemyHealth -= damage;
     }
-
 }

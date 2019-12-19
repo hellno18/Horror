@@ -13,11 +13,13 @@ public class Key : MonoBehaviour
 
     [SerializeField] private KeyType keyType = KeyType.normal;
 
+    bool isInteract;
+
+    //Global Variable
     HUD hud;
     Examines examines;
-    //PlayerController player;
+    AudioManager audioManager;
 
-    bool isInteract;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -26,6 +28,8 @@ public class Key : MonoBehaviour
         //get component examine
         examines = GameObject.FindGameObjectWithTag("Player")
             .GetComponent<Examines>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
         isInteract = false;
     }
 
@@ -34,6 +38,9 @@ public class Key : MonoBehaviour
     {
         if (Input.GetButton("Grab")&& isInteract)
         {
+            //play SE
+            audioManager.PlaySE("pickitem");
+
             var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IKey>();
             if (examines.GetExamineMode)
             {

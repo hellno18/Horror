@@ -25,6 +25,7 @@ public class HUD : MonoBehaviour
     private Slider batterySystem;
     private Slider healthSystem;
     private TextMeshProUGUI stressLVText;
+    private TextMeshProUGUI batteryText;
     private Transform tutorialFlashlight;
     private Transform questObjective;
     private Transform cameraRenderer;
@@ -53,15 +54,19 @@ public class HUD : MonoBehaviour
         //Camera Renderer
         cameraRenderer = this.transform.Find("CameraRenderer").GetComponent<Transform>();
         //get component stressLV
-        stressLVText = GameObject
-            .FindGameObjectWithTag("StressLV")
+        stressLVText = this.transform.Find("Health System/StressText")
             .GetComponent<TextMeshProUGUI>();
+        //get component battery text 
+        batteryText = this.transform.Find("CameraRenderer/BatteryText")
+            .GetComponent<TextMeshProUGUI>();
+
         //get component stamina
         staminaSystem = this.transform.Find("Stamina System").GetComponent<Image>();
         //get component tutorial Flashlight
         tutorialFlashlight = this.transform.Find("TutorialFlashLight").GetComponent<Transform>();
         //get component  quest objective
         questObjective = this.transform.Find("QuestObjective").GetComponent<Transform>();
+
 
         //Toggle
         Toggle1 = this.transform.Find("QuestObjective/Toggle1").GetComponent<Toggle>();
@@ -78,6 +83,7 @@ public class HUD : MonoBehaviour
         batterySystem.value = flashlight.GetBatLight/100;
         healthSystem.value = playerController.GetHealth / 100;
         stressLVText.text = playerController.StressLV.ToString();
+        batteryText.text = flashlight.GetBatCount.ToString();
         //Stamina
         var staminaPlayer = player.GetComponent<FirstPersonController>().GetStamina;
         var staminaPlayerDefault = player.GetComponent<FirstPersonController>().GetStaminaDefault;

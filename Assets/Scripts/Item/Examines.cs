@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Examines : MonoBehaviour
 {
-    private Camera mainCam;//Camera Object Will Be Placed In Front Of
-    private GameObject clickedObject;//Currently Clicked Object
-
     //Holds Original Postion And Rotation So The Object Can Be Replaced Correctly
     private Vector3 originaPosition;
     private Vector3 originalRotation;
@@ -20,11 +17,17 @@ public class Examines : MonoBehaviour
     //zoom speed
     private float zoomSpeed = 1f;
     float i=0;
+
+    //Global variable
+    private Camera mainCam;//Camera Object Will Be Placed In Front Of
+    private GameObject clickedObject;//Currently Clicked Object
+    private AudioManager audioManager; //reference to audio manager 
+
     void Start()
     {
-        //mainCam = Camera.main;
         mainCam = GameObject.FindGameObjectWithTag("MainCamera")
             .GetComponent<Camera>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         examineMode = false;
         isInteract = false;
@@ -32,10 +35,6 @@ public class Examines : MonoBehaviour
 
     private void Update()
     {
-        //RaycastHit hit;
-        //Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-
-        //Debug.DrawRay(ray.origin, ray.direction, Color.red);
         if (isInteract)
         {
             ClickObject();//Decide What Object To Examine
@@ -62,7 +61,7 @@ public class Examines : MonoBehaviour
             {
                 if (i >= -0.2)
                 {
-                    clickedObject.transform.Translate(scroll * zoomSpeed, scroll * zoomSpeed, 0, Space.World);
+                    clickedObject.transform.Translate(0, 0, scroll * zoomSpeed, Space.World);
                     i += scroll;
                 }
 
@@ -73,7 +72,7 @@ public class Examines : MonoBehaviour
             {
                 if (i <= 0.2)
                 {
-                    clickedObject.transform.Translate(scroll * zoomSpeed, scroll * zoomSpeed, 0, Space.World);
+                    clickedObject.transform.Translate(0, 0, scroll * zoomSpeed, Space.World);
                     i += scroll;
                 }
             }
@@ -95,6 +94,9 @@ public class Examines : MonoBehaviour
             {
                 if (hit.collider.tag == "Item")
                 {
+                    //Play SE
+                    audioManager.PlaySE("interactSFX");
+
                     //ClickedObject Will Be The Object Hit By The Raycast
                     clickedObject = hit.transform.gameObject;
 
@@ -145,6 +147,9 @@ public class Examines : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && examineMode)
         {
+            //Play SE
+            audioManager.PlaySE("interactSFX");
+
             //Reset Object To Original Position
             clickedObject.transform.position = originaPosition;
             clickedObject.transform.eulerAngles = originalRotation;

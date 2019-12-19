@@ -21,12 +21,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
     protected override void Run()
     {
-        //temp
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            stressLV = 150;
-        }
-
+        //show quest UI 
         if (Input.GetButtonDown("Quest"))
         {
             hud.QuestDisplay();
@@ -34,12 +29,19 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
         if (this.health <= 0)
         {
+            //shake the camera
+            CameraShake();
+
             StartCoroutine(ResultCoroutine());
         }
 
-        if (flashlight.GetIsLight)
+        if (flashlight.GetIsLight || isInsideLight)
         {
             currTimer -= Time.deltaTime;
+
+            if (!audioManager.AttachSESource.isPlaying)
+                audioManager.PlaySE("heartbeat-01a");
+
             if (currTimer < 0)
             {
                 StressLV -= 1;
@@ -55,7 +57,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         else
         {
             currTimer -= Time.deltaTime;
-            if (StressLV < 90)
+            if (StressLV < 85)
             {
                 if (currTimer < 0)
                 {
@@ -67,13 +69,13 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
                 }
             }
-            else if (StressLV >= 90 && StressLV < 120)
+            else if (StressLV >= 85 && StressLV < 120)
             {
                 if (currTimer < 0)
                 {
                     StressLV += 1;
                     health -= 1;
-                    currTimer = 3;
+                    currTimer = 1.5f;
                     if (!audioManager.AttachSESource.isPlaying)
                     {
                         audioManager.PlaySE("heartbeat-02a");
@@ -86,7 +88,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                 {
                     StressLV += 1;
                     health -= 1;
-                    currTimer = 1;
+                    currTimer = 1f;
                     if (!audioManager.AttachSESource.isPlaying)
                     {
                         audioManager.PlaySE("heartbeat-03");
@@ -99,7 +101,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
                 {
                     StressLV += 2;
                     health -= 3;
-                    currTimer = 1;
+                    currTimer = 0.5f;
                     if (!audioManager.AttachSESource.isPlaying)
                     {
                         audioManager.PlaySE("heartbeat-04");
@@ -155,6 +157,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
             PlayerPrefs.SetString("Result", "Win");
         }
         yield return new WaitForSeconds(2f);
+        audioManager.StopSE();
         controller.m_MouseLook.SetCursorLock(false);
         SceneManager.LoadScene("Result");
     }

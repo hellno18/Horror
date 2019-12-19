@@ -9,7 +9,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     //Save key BGM & SE
     private const string BGM_Volume_Key = "BGM_VOLUME_KEY";
     private const string SE_Volume_Key = "SE_VOLUME_KEY";
-    private const float BGM_Volume_Default = 1.0f;
+    private const float BGM_Volume_Default = 0.51f;
     private const float SE_Volume_Default = 1.0f;
 
     //BGM fade 
@@ -161,6 +161,11 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
         PlayerPrefs.SetFloat(BGM_Volume_Key, BGMVolume);
         PlayerPrefs.SetFloat(SE_Volume_Key, SEVolume);
+    }
+   
+    public void StopSE()
+    {
+        AttachSESource.Stop();
     }
 
     public AudioSource GetAttachSESource
