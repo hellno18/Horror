@@ -150,13 +150,14 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         //TODO
         if (health <= 0)
         {
+            //audioManager.PlaySE("Dead Sound Effect");
             PlayerPrefs.SetString("Result", "Lose");
         }
         if(health>0 && keyExit)
         {
             PlayerPrefs.SetString("Result", "Win");
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         audioManager.StopSE();
         controller.m_MouseLook.SetCursorLock(false);
         SceneManager.LoadScene("Result");
