@@ -55,13 +55,14 @@ public class Examines : MonoBehaviour
     {
         if (examineMode)
         {
+            var player = GameObject.FindGameObjectWithTag("Player");
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             // if object scrolled to front
             if (scroll < 0)
             {
                 if (i >= -0.2)
                 {
-                    clickedObject.transform.Translate(0, 0, scroll * zoomSpeed, Space.World);
+                    clickedObject.transform.Translate(scroll * zoomSpeed, 0, scroll * zoomSpeed, Space.World);
                     i += scroll;
                 }
 
@@ -72,7 +73,7 @@ public class Examines : MonoBehaviour
             {
                 if (i <= 0.2)
                 {
-                    clickedObject.transform.Translate(0, 0, scroll * zoomSpeed, Space.World);
+                    clickedObject.transform.Translate(scroll * zoomSpeed, 0, scroll * zoomSpeed, Space.World);
                     i += scroll;
                 }
             }
@@ -85,6 +86,7 @@ public class Examines : MonoBehaviour
     ==============================*/
     void ClickObject()
     {
+        var player = GameObject.FindGameObjectWithTag("Player");
         if (Input.GetMouseButtonDown(0) && !examineMode)
         {
             RaycastHit hit;
@@ -104,6 +106,8 @@ public class Examines : MonoBehaviour
                     originaPosition = clickedObject.transform.position;
                     originalRotation = clickedObject.transform.rotation.eulerAngles;
 
+                    //clicked object will look rotation with player
+                    clickedObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position), 1 * Time.deltaTime);
                     //Now Move Object In Front Of Camera
                     clickedObject.transform.position = mainCam.transform.position 
                         + (transform.forward)/2;

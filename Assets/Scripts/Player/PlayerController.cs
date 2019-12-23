@@ -150,7 +150,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         //TODO
         if (health <= 0)
         {
-            //audioManager.PlaySE("Dead Sound Effect");
+            audioManager.PlayBGM("Dead Sound Effect");
             PlayerPrefs.SetString("Result", "Lose");
         }
         if(health>0 && keyExit)

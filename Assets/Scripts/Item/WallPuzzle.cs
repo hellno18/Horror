@@ -15,7 +15,6 @@ public class WallPuzzle : MonoBehaviour
     void Update()
     {
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPuzzle>();
-        //print(player.GetCountPuzzle());
         if (player.GetCountPuzzle() == 2)
         {
             this.animWall.SetBool("Done",true);

@@ -225,8 +225,14 @@ public class EnemySlenderNormal : EnemyBase
     ============================*/
     IEnumerator DissolveEnemyCoroutine()
     {
+        if (timeDis < 0.01f)
+        {
+            //sfx dead slenderman
+            audioManager.PlaySE("blood_guts_spill");
+        }
         timeDis += Time.deltaTime;
         mat.SetFloat("_DissolveAmount", timeDis / 2 + 0.1f);
+        
         yield return new WaitForSeconds(0.3f);
         if (mat.GetFloat("_DissolveAmount") >= 1)
         {
