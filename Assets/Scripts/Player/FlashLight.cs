@@ -149,7 +149,7 @@ public class FlashLight : PlayerBase
             reloadUI.fillAmount = reloadTimer/5;
             reloadUI.gameObject.SetActive(false);
         }
-        print(reloadTimer);
+        
         /*====================
         *press reload flashlight
         =====================*/
@@ -157,9 +157,6 @@ public class FlashLight : PlayerBase
         {
             //give delay 5 second
             StartCoroutine(ReloadCoroutine(reloadUI));
-            
-            
-
         }
     }
 
