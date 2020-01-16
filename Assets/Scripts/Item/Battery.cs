@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
+    public bool isDestroy { get; set; }
     bool isInteract;
-    
+
     //Global variable
     FlashLight flashlight;
     HUD hud;
@@ -14,6 +15,7 @@ public class Battery : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isDestroy = false;
         //get component flashlight
         flashlight = GameObject.FindGameObjectWithTag("Player")
             .GetComponentInChildren<FlashLight>();
@@ -47,6 +49,7 @@ public class Battery : MonoBehaviour
             //display hud
             hud.GButtonDisplay();
             //destroy
+            isDestroy = true;
             Destroy(this.gameObject);
         }
     }
