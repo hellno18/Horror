@@ -4198,6 +4198,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.7770001
       objectReference: {fileID: 0}
+    - target: {fileID: 80973970, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 80973970, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
+      propertyPath: m_Radius
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563243691986805106, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563243691986805106, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
+        type: 3}
+      propertyPath: m_WalkableMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 430430121908739373, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
         type: 3}
       propertyPath: pointLights.Array.size
@@ -4221,32 +4239,6 @@ PrefabInstance:
     - target: {fileID: 1825612851, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 80973970, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 80973970, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
-      propertyPath: m_Radius
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5563243691986805106, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 5563243691986805106, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7,
-        type: 3}
-      propertyPath: m_WalkableMask
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1076820073817954, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_NavMeshLayer
@@ -4275,6 +4267,14 @@ PrefabInstance:
     - target: {fileID: 858772277, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148999963, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1335653856, guid: 0b0fdd8f28ae2514b817aa97a59cbdc7, type: 3}
       propertyPath: m_NavMeshLayer
@@ -20748,6 +20748,10 @@ PrefabInstance:
       propertyPath: m_SpotAngle
       value: 40.5
       objectReference: {fileID: 0}
+    - target: {fileID: 818965938, guid: d244e81dfa06f8c418f07adb45c55fe1, type: 3}
+      propertyPath: state
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d244e81dfa06f8c418f07adb45c55fe1, type: 3}
 --- !u!1001 &1812289770
@@ -23408,7 +23412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 781.6, y: -469.4}
+  m_AnchoredPosition: {x: 781.6, y: -413.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074339360

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Result : MonoBehaviour
@@ -36,6 +37,11 @@ public class Result : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
             bg.color = Color.red;
             audioManager.PlayBGM("Mystery-David-Fesliyan");
+        }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : PlayerBase, IPuzzle,IKey
 {
+    [SerializeField] enum State
+    {
+        Tutorial,
+        Game
+    }
+    [SerializeField] State state;
+    private bool isPause;
     private float timer = 5;
     private float currTimer;
     // Start is called before the first frame update
     void Start()
     {
+        isPause = false;
         //set default Health 
         health = 100;
         //set default stress LV
@@ -21,10 +29,22 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
     protected override void Run()
     {
-        //show quest UI 
-        if (Input.GetButtonDown("Quest"))
+        switch (state)
         {
-            hud.QuestDisplay();
+            case State.Tutorial:
+
+                break;
+            case State.Game:
+                //show quest UI 
+                if (Input.GetButtonDown("Quest"))
+                {
+                    hud.QuestDisplay();
+                }
+                break;
+        }
+        if (Input.GetButtonDown("Cancel"))
+        {
+            PauseGame();
         }
 
         if (this.health <= 0)
@@ -124,6 +144,22 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
         }
     }
 
+    private void PauseGame()
+    {
+        isPause = !isPause;
+        if (isPause)
+        {
+            controller.m_MouseLook.lockCursor = false;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            controller.m_MouseLook.lockCursor = true;
+            Time.timeScale = 1f;
+        }
+
+
+    }
 
 
     //For camera shake
