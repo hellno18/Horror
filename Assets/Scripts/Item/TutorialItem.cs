@@ -7,7 +7,8 @@ public class TutorialItem : MonoBehaviour
     public enum Item
     {
         None,
-        Battery
+        Battery,
+        Key
     }
     public Item item;
 
@@ -17,45 +18,94 @@ public class TutorialItem : MonoBehaviour
 
     //Position old item
     Vector3 oldItemPosition;
+    
 
     //Bool item
     bool isSpawn=false;
 
-    //Battery
+    //Global Variable
     Battery battery;
+    Key key;
     // Start is called before the first frame update
     void Start()
     {
-        if(item == Item.Battery)
+        switch (item)
         {
-            oldItem = this.transform.Find("Battery").GetComponent<Transform>();
-            oldItemPosition = oldItem.transform.position;
-            prefapItem = (GameObject)Resources.Load("Prefaps/Battery");
-            battery = oldItem.GetComponent<Battery>();
+            case Item.Battery:
+                oldItem = this.transform.Find("Battery").GetComponent<Transform>();
+                oldItemPosition = oldItem.transform.position;
+                prefapItem = (GameObject)Resources.Load("Prefaps/Battery");
+                battery = oldItem.GetComponent<Battery>();
+                break;
+            case Item.Key:
+                oldItem = this.transform.Find("key_silver").GetComponent<Transform>();
+                oldItemPosition = oldItem.transform.position;
+                prefapItem = (GameObject)Resources.Load("Prefaps/keys/key_silver");
+                key = oldItem.GetComponent<Key>();
+                break;
         }
     }
 
     private void Update()
     {
-        //Get component new battery
-        if (battery.isDestroy&&isSpawn && item == Item.Battery)
+
+        switch (item)
         {
-            oldItem = this.transform.Find("Battery").GetComponent<Transform>();
-            battery = oldItem.GetComponent<Battery>();
-            isSpawn = false;
+            case Item.Battery:
+                if (battery.isDestroy && isSpawn)
+                {
+                    oldItem = this.transform.Find("Battery").GetComponent<Transform>();
+                    battery = oldItem.GetComponent<Battery>();
+                    isSpawn = false;
+                }
+                break;
+
+            case Item.Key:
+                if (key.isDestroy && isSpawn)
+                {
+                    oldItem = this.transform.Find("key_silver").GetComponent<Transform>();
+                    key = oldItem.GetComponent<Key>();
+                    isSpawn = false;
+                }
+               
+                break;
         }
+
+        //Get component new battery
+       
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (battery.isDestroy && item == Item.Battery)
+
+        switch (item)
         {
-            isSpawn = true;
-            GameObject newItem = Instantiate(prefapItem, oldItemPosition, Quaternion.identity,this.transform) as GameObject;
-            newItem.transform.localScale = new Vector3(0.5183195f, 0.5183195f, 0.5183195f);
-            newItem.name = "Battery";
+            case Item.Battery:
+                if (battery.isDestroy)
+                {
+                    isSpawn = true;
+                    GameObject newItem = Instantiate(prefapItem, oldItemPosition, Quaternion.identity, this.transform) as GameObject;
+                    newItem.transform.localScale = new Vector3(0.5183195f, 0.5183195f, 0.5183195f);
+                    newItem.name = "Battery";
+                }
+                break;
+
+            case Item.Key:
+                if (key.isDestroy)
+                {
+                    isSpawn = true;
+                    GameObject newItem = Instantiate(prefapItem, oldItemPosition, Quaternion.identity, this.transform) as GameObject;
+                    newItem.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    newItem.transform.localRotation = Quaternion.Euler(0.554f, -8.133f,0f);
+                    newItem.name = "key_silver";
+                }
+                break;
         }
        
+
+
+
 
 
 

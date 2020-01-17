@@ -13,8 +13,9 @@ public class Key : MonoBehaviour
 
     [SerializeField] private KeyType keyType = KeyType.normal;
 
+    public bool isDestroy { get; set; }
     bool isInteract;
-
+    
     //Global Variable
     HUD hud;
     Examines examines;
@@ -23,6 +24,7 @@ public class Key : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        isDestroy = false;
         //get component HUD
         hud = GameObject.Find("CanvasHUD").GetComponent<HUD>();
         //get component examine
@@ -64,6 +66,7 @@ public class Key : MonoBehaviour
            //display hud
             hud.GButtonDisplay();
             //destroy
+            isDestroy = true;
             Destroy(this.gameObject);
         }
     }
