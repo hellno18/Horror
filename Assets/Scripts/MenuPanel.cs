@@ -28,6 +28,9 @@ public class MenuPanel : MonoBehaviour
     private Slider _bgmSlider;
     private Slider _seSlider;
 
+    //Flicker 3d sound
+    private AudioSource _flickerSound;
+
     //Global Variable
     AudioManager _audioManager;
 
@@ -44,10 +47,19 @@ public class MenuPanel : MonoBehaviour
         _bgmSlider = this.transform.Find("OptionPanel/BGMSlider").GetComponent<Slider>();
         _seSlider = this.transform.Find("OptionPanel/SESlider").GetComponent<Slider>();
         _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        _flickerSound = GameObject.Find("FlickerLamp").GetComponent<AudioSource>();
 
         //Slider
         _bgmSlider.value = _audioManager.BGMSource;
         _seSlider.value = _audioManager.SESource;
+        if (_seSlider.value == 0)
+        {
+            _flickerSound.volume = 0;
+        }
+        else
+        {
+            _flickerSound.volume = 0.15f;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -83,6 +95,16 @@ public class MenuPanel : MonoBehaviour
             _audioManager.BGMSource = _bgmSlider.value;
             _audioManager.AttachSESource.volume = _seSlider.value;
             _audioManager.SESource = _seSlider.value;
+        }
+
+        //Flicker 3D
+        if (_seSlider.value == 0)
+        {
+            _flickerSound.volume = 0;
+        }
+        else
+        {
+            _flickerSound.volume = 0.15f;
         }
     }
 
