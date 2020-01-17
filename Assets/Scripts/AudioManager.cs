@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 // BGM & SE For AudioManager
@@ -9,8 +10,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     //Save key BGM & SE
     private const string BGM_Volume_Key = "BGM_VOLUME_KEY";
     private const string SE_Volume_Key = "SE_VOLUME_KEY";
-    private const float BGM_Volume_Default = 0.51f;
-    private const float SE_Volume_Default = 1.0f;
+    private float BGM_Volume_Default = 0.51f;
+    private float SE_Volume_Default = 1.0f;
 
     //BGM fade 
     public const float BGM_Fade_Speed_Rate_High = 0.9f;
@@ -63,8 +64,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
     private void Start()
     {
-        AttachBGMSource.volume = PlayerPrefs.GetFloat(BGM_Volume_Key, BGM_Volume_Default);
-        AttachSESource.volume = PlayerPrefs.GetFloat(SE_Volume_Key, SE_Volume_Default);
+        AttachBGMSource.volume = PlayerPrefs.GetFloat(BGM_Volume_Key, BGMSource);
+        AttachSESource.volume = PlayerPrefs.GetFloat(SE_Volume_Key, SESource);
     }
 
     //=================================================================================
@@ -162,7 +163,7 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         PlayerPrefs.SetFloat(BGM_Volume_Key, BGMVolume);
         PlayerPrefs.SetFloat(SE_Volume_Key, SEVolume);
     }
-   
+
     public void StopSE()
     {
         AttachSESource.Stop();
@@ -173,6 +174,32 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
         get
         {
             return GetAttachSESource;
+        }
+    }
+
+    public float BGMSource
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(BGM_Volume_Key);
+        }
+        set
+        {
+            BGM_Volume_Default=value;
+            PlayerPrefs.SetFloat(BGM_Volume_Key, value);
+        }
+    }
+    
+    public float SESource
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(SE_Volume_Key);
+        }
+        set
+        {
+            SE_Volume_Default = value;
+            PlayerPrefs.SetFloat(SE_Volume_Key, value);
         }
     }
 }
