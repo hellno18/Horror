@@ -9,7 +9,9 @@ public class EnemyBase : MonoBehaviour, IDamage
     {
         walk,
         attack,
-        chase
+        chase,
+        fire
+
     }
 
     protected EnemyState enemyState;
@@ -20,7 +22,7 @@ public class EnemyBase : MonoBehaviour, IDamage
     protected NavMeshAgent navMesh;
     protected Animator animator;
     protected Slider enemyBar;
-    protected float damage=25;
+    protected float damage=15f;
     protected Material mat;
 
     private void OnEnable()

@@ -8,7 +8,7 @@ public class EnemySlenderNormal : EnemyBase
 {
     public enum EnemyType
     {
-        patrol,
+        boss,
         normal
     }
     [SerializeField] private EnemyType enemyType;
@@ -20,7 +20,11 @@ public class EnemySlenderNormal : EnemyBase
     [SerializeField] private float xMax=45f;
     [SerializeField] private float zMin = 0f;
     [SerializeField] private float zMax = -30f;
-    [SerializeField] private Transform[] points;
+
+    private float startTimeShot=2f;
+    private float timeShot;
+    //Prefab Gameobject Brain
+    private GameObject brainPrefap;
     private Transform player;
     private float timeDis=0;
     private int destPoint = 0;
@@ -57,6 +61,7 @@ public class EnemySlenderNormal : EnemyBase
         enemyLight.gameObject.SetActive(false);
 
         navMesh.speed = 2.5f;
+        timeShot = startTimeShot;
         //=======================================================================
 
         switch (enemyType)
@@ -65,8 +70,9 @@ public class EnemySlenderNormal : EnemyBase
                 //default go to next point
                 GotoNextPoint();
                 break;
-            case EnemyType.patrol:
-                GoToPatrol();
+            case EnemyType.boss:
+                brainPrefap = Resources.Load<GameObject>("Prefaps/brainAttack");
+                enemyHealth = 300f;
                 break;
         }
        
@@ -101,17 +107,34 @@ public class EnemySlenderNormal : EnemyBase
                 navMesh.speed = 2.5f;
             }
             //CHASE
-            enemyState = EnemyState.chase;
             var targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
 
             // Smoothly rotate towards the target point.
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1 * Time.deltaTime);
+            if (enemyType == EnemyType.normal)
+            {
+                enemyState = EnemyState.chase;
+                
 
-            //follow player
-            navMesh.isStopped = false;
-            navMesh.SetDestination(player.position);
-            //related between distance and far with player
-            if (distance < far)
+                //follow player
+                navMesh.isStopped = false;
+                navMesh.SetDestination(player.position);
+            }
+            
+            if(enemyType == EnemyType.boss && enemyState == EnemyState.chase)
+            {
+                //follow player
+                navMesh.isStopped = false;
+                navMesh.SetDestination(player.position);
+            }
+            
+
+
+
+          
+
+            //related between distance and far with player (NORMAL)
+            if (distance < far && enemyType == EnemyType.normal)
             {
                 //stop nav agent
                 navMesh.isStopped = true;
@@ -120,12 +143,35 @@ public class EnemySlenderNormal : EnemyBase
                 //Attack state
                 enemyState = EnemyState.attack;
             }
+
+            //(BOSS)
+            if (distance > far && enemyType == EnemyType.boss)
+            {
+                //Attack state
+                enemyState = EnemyState.fire;
+              
+            }
+            else if(distance>2 && distance<3)
+            {
+                //Attack state
+                enemyState = EnemyState.chase;
+            }
+            else if(distance<1.5f)
+            {
+                //stop nav agent
+                navMesh.isStopped = true;
+                navMesh.velocity = Vector3.zero;
+                //Attack state
+                enemyState = EnemyState.attack;
+            }
+
         }
         //Doesn't see anything --> random walk
         else
         {
             enemyState= EnemyState.walk;
         }
+
         if (enemyType == EnemyType.normal)
         {
             switch (enemyState)
@@ -152,13 +198,28 @@ public class EnemySlenderNormal : EnemyBase
                     break;
             }
         }
-        if(enemyType == EnemyType.patrol)
+        if(enemyType == EnemyType.boss)
         {
-            if (navMesh.remainingDistance < 0.5f)
+            switch (enemyState)
             {
-                animator.SetBool("Chase", false);
-                //idle and find another to patrol
-                GoToPatrol();
+                case EnemyState.chase:
+                    //chase animation
+                    animator.SetBool("Chase", true);
+                    //Enemy is around player
+                    isAroundPlayer = true;
+                    break;
+                case EnemyState.fire:
+                    //chase animation
+                    animator.SetBool("Chase", true);
+                    StartCoroutine(AttackFire());
+                    //animator.SetTrigger("Attack");
+                    attackSpeed -= Time.deltaTime;
+                    break;
+                case EnemyState.attack:
+                    animator.SetBool("Chase", true);
+                    animator.SetTrigger("Attack");
+                    attackSpeed -= Time.deltaTime;
+                    break;
             }
         }
 
@@ -181,6 +242,24 @@ public class EnemySlenderNormal : EnemyBase
         
     }
 
+    private IEnumerator AttackFire()
+    {
+        if (timeShot <= 0)
+        {
+            GameObject objBall = Instantiate(brainPrefap,new Vector3(this.transform.position.x, this.transform.position.y+1.5f, this.transform.position.z), Quaternion.identity) as GameObject;
+            Rigidbody rb = objBall.GetComponent<Rigidbody>();
+            rb.velocity = transform.forward * 10;
+            timeShot = startTimeShot;
+        }
+        else
+        {
+            timeShot -= Time.deltaTime;
+        }
+        
+        yield return new WaitForSeconds(2f);
+        animator.SetBool("Chase", false);
+    }
+
     private void DamageToPlayer()
     {
         player.GetComponent<PlayerController>().SetHealth =
@@ -201,23 +280,7 @@ public class EnemySlenderNormal : EnemyBase
         
     }
 
-    /*======================
-    * Go to Patrol Point 
-    ======================*/
-    void GoToPatrol()
-    {
-        // Returns if no points have been set up
-        if (points.Length == 0)
-            return;
-
-        // Set the agent to go to the currently selected destination.
-        navMesh.destination = points[destPoint].position;
-
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
-        destPoint = (destPoint + 1) % points.Length;
-    }
-
+    
 
 
     /*============================

@@ -49,6 +49,7 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
         if (this.health <= 0)
         {
+            GameObject.Find("FillHealth").gameObject.SetActive(false);
             //shake the camera
             CameraShake();
 

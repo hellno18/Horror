@@ -24,6 +24,7 @@ public class FlashLight : PlayerBase
     private Light pointLight;                // Reference to light component.
     private AudioManager audioManager;
     private Image reloadUI;
+    private Image batteryBarImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,7 @@ public class FlashLight : PlayerBase
         pointLight = GameObject.Find("PointLight").GetComponent<Light>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager")
             .GetComponent<AudioManager>();
+        batteryBarImage = GameObject.Find("FillBattery").GetComponent<Image>();
     }
 
     //OverLoading flashlight
@@ -92,11 +94,13 @@ public class FlashLight : PlayerBase
                 batLevel = 0;
                 hand.gameObject.SetActive(false);
                 isLight = false;
+                batteryBarImage.gameObject.SetActive(false);
                 //Play turn off torch
                 //audioManager.PlaySE("torch");
             }
             else
             {
+                batteryBarImage.gameObject.SetActive(true);
                 light.enabled = true;
                 pointLight.enabled = true;
                 isLight = true;
@@ -111,7 +115,7 @@ public class FlashLight : PlayerBase
 
         //get input flashlight button
         if (Input.GetButtonUp("Flashlight") &&
-            !examines.GetExamineMode && isBringTorch)
+            !examines.GetExamineMode && isBringTorch && batLevel>0)
         {
             //Play se
             audioManager.PlaySE("torch");
@@ -167,6 +171,7 @@ public class FlashLight : PlayerBase
         //play se
         audioManager.PlaySE("change_battery");
         yield return new WaitForSeconds(reloadTimer);
+        batteryBarImage.gameObject.SetActive(true);
         //random reload
         //Battery 80-100%
         int randomBat = Random.Range(80, 100);

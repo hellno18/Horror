@@ -54,6 +54,8 @@ public class Quest : MonoBehaviour
         if (player.GetKeyExit())
         {
             hud.Toggle3.isOn = true;
+            audioManager.PlayBGM("Chase_Scene_Music_-_David_Fesliyan");
+            return;
         }
 
         

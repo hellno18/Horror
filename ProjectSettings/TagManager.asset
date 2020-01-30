@@ -16,6 +16,7 @@ TagManager:
   - Result
   - AudioManager
   - Light
+  - Wall
   layers:
   - Default
   - TransparentFX
