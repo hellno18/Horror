@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class PlayerController : PlayerBase, IPuzzle,IKey
@@ -15,9 +16,11 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
     private bool isPause;
     private float timer = 5;
     private float currTimer;
+    private Image fillHealth;
     // Start is called before the first frame update
     void Start()
     {
+        fillHealth = GameObject.Find("FillHealth").GetComponent<Image>();
         isPause = false;
         //set default Health 
         health = 100;
@@ -49,7 +52,9 @@ public class PlayerController : PlayerBase, IPuzzle,IKey
 
         if (this.health <= 0)
         {
-            GameObject.Find("FillHealth").gameObject.SetActive(false);
+            fillHealth.gameObject.SetActive(false);
+            CharacterController cc = this.GetComponent<CharacterController>();
+            cc.enabled = false;
             //shake the camera
             CameraShake();
 
