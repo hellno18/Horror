@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2793963, g: 0.26136994, b: 0.206617, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4277,10 +4277,6 @@ MonoBehaviour:
   xMax: 45
   zMin: 0
   zMax: -30
-  points:
-  - {fileID: 2088446706}
-  - {fileID: 2129877251}
-  - {fileID: 1333245138}
 --- !u!95 &1100076928
 Animator:
   serializedVersion: 3
@@ -5152,7 +5148,7 @@ GameObject:
   - component: {fileID: 1247461831}
   - component: {fileID: 1247461830}
   m_Layer: 0
-  m_Name: Fill
+  m_Name: FillBattery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7851,7 +7847,7 @@ GameObject:
   - component: {fileID: 1964083991}
   - component: {fileID: 1964083990}
   m_Layer: 0
-  m_Name: Fill
+  m_Name: FillHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
